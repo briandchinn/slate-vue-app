@@ -8,6 +8,9 @@ import UsersNew from './views/Users/New.vue'
 import UsersShow from './views/Users/Show.vue'
 import UsersEdit from './views/Users/Edit.vue'
 import NotificationsIndex from './views/Notifications/Index.vue'
+import Signup from './views/Signup.vue'
+import Login from './views/Login.vue'
+import Logout from './views/Logout.vue'
 
 Vue.use(Router)
 
@@ -54,6 +57,21 @@ export default new Router({
       path: '/notifications',
       name: 'notifications-index',
       component: NotificationsIndex
+    },
+    {
+      path: '/signup',
+      name: 'signup',
+      component: Signup
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login
+    },
+    {
+      path: '/logout',
+      name: 'logout',
+      component: Logout
     },
   ]
 })
