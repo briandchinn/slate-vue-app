@@ -1,6 +1,8 @@
 <template>
   <div class="users-show">
     
+    {{ user }}
+    
     <h1>{{ message }}</h1>
     <img v-bind:src="user.image">
     <h3>First Name: {{ user.first_name }}</h3>

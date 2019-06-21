@@ -15,7 +15,17 @@
     <router-link v-bind:to="'/projects/' + project.id + '/edit'">Edit Project</router-link>
     </button>    
     <button v-on:click="destroy(project)">Destroy Project</button>
-  </div>
+
+
+    <h1>Would You Like to Apply?</h1>
+    <form v-on:submit.prevent="submit()">
+      <div class="form-group">
+        <label for="note">Note</label>
+        <input type="text" class="form-control" id="note" placeholder="Send a message to Project Owner" v-model="newProjectNote">
+      </div>
+      <button type="submit" class="btn btn-success">Apply</button>
+    </form>
+
 
   </div>
 </template>
@@ -30,7 +40,8 @@ export default {
   data: function() {
     return {
       message: 'This is the Project Show Page',
-      project: {}
+      project: {},
+      newProjectNote: ""
     };
   },
   created: function() {
@@ -49,6 +60,16 @@ export default {
     },
     relativeDate: function(date) {
       return moment(date).fromNow();
+    },
+    submit: function(){
+      var params = {
+        project_id: this.project.id,
+        note: this.newProjectNote
+      };
+      axios.post("api/applications", params).then(response => {
+        // this.$router.push("/projects/" + this.project.id)
+        this.newProjectNote = "";
+      })
     }
   }
 };
