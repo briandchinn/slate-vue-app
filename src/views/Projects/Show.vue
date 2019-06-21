@@ -1,14 +1,19 @@
 <template>
   <div class="projects-show">
+    
     {{ project }}
     <h1>{{ message }}</h1>
+<!--     <h3>Posted By: {{ project.user.first_name }} {{ project.user.last_name }}</h3> -->
     <h3>Title: {{ project.title }}</h3>
     <h3>Description: {{ project.description }}</h3>
     <h3>Address: {{ project.address }}</h3>
     <h3>Start Date: {{ project.start_date }}</h3>
     <h3>End Date: {{ project.end_date }}</h3>
     <h3>Number of Positions: {{ project.number_of_positions }}</h3>
-    <button v-on:click="edit(project)">Edit Project</button>
+    <h3>Posted: {{ relativeDate(project.created_at) }}</h3>
+    <button>
+    <router-link v-bind:to="'/projects/' + project.id + '/edit'">Edit Project</router-link>
+    </button>    
     <button v-on:click="destroy(project)">Destroy Project</button>
   </div>
 
@@ -18,6 +23,8 @@
 <script>
 
 import axios from "axios";
+import moment from "moment";
+
 
 export default {
   data: function() {
@@ -39,7 +46,10 @@ export default {
           console.log("Success!", response.data);
           this.$router.push("/projects");
         });
-      }
+    },
+    relativeDate: function(date) {
+      return moment(date).fromNow();
+    }
   }
 };
 </script>

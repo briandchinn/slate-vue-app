@@ -1,14 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
-import ProjectsIndex from './views/ProjectsIndex.vue'
-import ProjectsNew from './views/ProjectsNew.vue'
-import ProjectsShow from './views/ProjectsShow.vue'
-import ProjectsEdit from './views/ProjectsEdit.vue'
-import UsersNew from './views/UsersNew.vue'
-import UsersShow from './views/UsersShow.vue'
-import UsersEdit from './views/UsersEdit.vue'
-import NotificationsIndex from './views/NotificationsIndex.vue'
+import ProjectsIndex from './views/Projects/Index.vue'
+import ProjectsNew from './views/Projects/New.vue'
+import ProjectsShow from './views/Projects/Show.vue'
+import ProjectsEdit from './views/Projects/Edit.vue'
+import UsersNew from './views/Users/New.vue'
+import UsersShow from './views/Users/Show.vue'
+import UsersEdit from './views/Users/Edit.vue'
+import NotificationsIndex from './views/Notifications/Index.vue'
 
 Vue.use(Router)
 
@@ -16,19 +15,6 @@ export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
-    {
-      path: '/',
-      name: 'home',
-      component: Home
-    },
-    {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
-    },
     {
       path: '/projects',
       name: 'projects-index',
