@@ -2,7 +2,6 @@
   <div class="users-show">
     
     {{ user }}
-    
     <h1>{{ message }}</h1>
     <img v-bind:src="user.image">
     <h3>First Name: {{ user.first_name }}</h3>
@@ -18,9 +17,17 @@
     </button>
 
     <button v-on:click="destroy(user)">Destroy User</button>
-    
+    <hr>
+    <h1>Applications</h1>
 
-  </div>
+    <div v-for="application in user.applications">
+      <h5>{{ application.project.title }}</h5>
+      <h5>{{ application.project.description }}</h5>
+      <h5>{{ application.project.address }}</h5>
+      <h5>{{ application.project.start_date }} - {{ application.project.end_date }}</h5>
+      <hr>
+    </div>
+    
 
   </div>
 </template>
@@ -32,8 +39,8 @@ import axios from "axios";
 export default {
   data: function() {
     return {
-      message: 'This is the Users Show Page',
-      user: {}
+      message: 'This is a Users Show Page',
+      user: {},
     };
   },
   created: function() {
