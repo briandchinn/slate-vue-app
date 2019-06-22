@@ -34,10 +34,6 @@
         <label for="number_of_positions">Number of Positions</label>
         <input type="number" class="form-control" id="number_of_positions" placeholder="" v-model="project.number_of_positions">
       </div>
-      <div class="form-group">
-        <label for="user_id">User ID</label>
-        <input type="number" class="form-control" id="user_id" placeholder="" v-model="project.user_id">
-      </div>
       <button type="submit" class="btn btn-success">Update</button>
     </form>
 
@@ -71,7 +67,6 @@ export default {
         start_date: this.project.start_date,
         end_date: this.project.end_date,
         number_of_positions: this.project.number_of_positions,
-        user_id: this.project.user_id,
       };
       axios.patch("api/projects/" + this.project.id, params).then(response => {
         console.log("Success!", response.data)

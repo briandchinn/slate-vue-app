@@ -25,7 +25,7 @@
       </div>
       <button type="submit" class="btn btn-success">Apply</button>
     </form>
-
+    {{ message }}
 
   </div>
 </template>
@@ -41,7 +41,8 @@ export default {
     return {
       message: 'This is the Project Show Page',
       project: {},
-      newProjectNote: ""
+      newProjectNote: "",
+      message: ""
     };
   },
   created: function() {
@@ -69,8 +70,10 @@ export default {
       axios.post("api/applications", params).then(response => {
         // this.$router.push("/projects/" + this.project.id)
         this.newProjectNote = "";
+        this.message = "You've succesfully applied!";
       })
     }
   }
 };
 </script>
+
