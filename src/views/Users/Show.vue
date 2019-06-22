@@ -1,27 +1,36 @@
 <template>
   <div class="users-show">
     
-    {{ user }}
-    <h1>{{ message }}</h1>
+    <!-- {{ user }} -->
+    <h1>{{ user.first_name }} {{ user.last_name }}</h1>
     <img v-bind:src="user.image">
-    <h3>First Name: {{ user.first_name }}</h3>
-    <h3>Last Name: {{ user.last_name }}</h3>
+    <h3>Current Position: {{ user.current_job_title }}</h3>
+    <h3><a href="https://www.w3schools.com/html/">IMDB URL</a></h3>
     <h3>Email: {{ user.email }}</h3>
     <h3>Address: {{ user.address }}</h3>
     <h3>Phone Number: {{ user.phone_number }}</h3>
-    <h3>IMDB Url: {{ user.imdb_url }}</h3>
     <h3>Resume: {{ user.resume }}</h3>
-    <h3>Current Position: {{ user.current_job_title }}</h3>
     <button>
       <router-link v-bind:to="'/users/' + user.id + '/edit'">Edit User</router-link>
     </button>
 
     <button v-on:click="destroy(user)">Destroy User</button>
-    <hr>
-    <h1>Applications</h1>
 
+    <br>
+    <hr>
+
+    <h1>{{ user.first_name }} {{ user.last_name }}'s Projects</h1>
+    <div v-for="project in user.projects">
+      <router-link v-bind:to="'/projects/' + project.id">{{ project.title }}</router-link>
+      <h5>{{ project.description }}</h5>
+      <h5>{{ project.address }}</h5>
+      <h5>{{ project.start_date }} - {{ project.end_date }}</h5>
+      <hr>
+    </div>
+    
+    <h1>Applications</h1>
     <div v-for="application in user.applications">
-      <h5>{{ application.project.title }}</h5>
+      <router-link v-bind:to="'/projects/' + application.project.id">{{ application.project.title }}</router-link>
       <h5>{{ application.project.description }}</h5>
       <h5>{{ application.project.address }}</h5>
       <h5>{{ application.project.start_date }} - {{ application.project.end_date }}</h5>

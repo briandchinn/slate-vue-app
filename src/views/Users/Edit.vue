@@ -1,7 +1,7 @@
 <template>
   <div class="users-edit">
 
-    <h1>{{ message }}</h1>
+    <h1>Edit {{ user.first_name }} {{ user.last_name }}'s Profile</h1>
     
     <ul>
       <li v-for="error in errors">{{ error }}</li>
@@ -59,7 +59,6 @@ import axios from "axios";
 export default {
   data: function() {
     return {
-      message: 'This is the Edit User Page',
       user: {},
       errors: []
     };

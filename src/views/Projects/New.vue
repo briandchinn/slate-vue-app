@@ -29,10 +29,6 @@
         <label for="number_of_positions">Number of Positions</label>
         <input type="number" class="form-control" id="number_of_positions" placeholder="" v-model="newProjectPositions">
       </div>
-      <div class="form-group">
-        <label for="user_id">User ID</label>
-        <input type="number" class="form-control" id="user_id" placeholder="" v-model="newUserId">
-      </div>
       <button type="submit" class="btn btn-success">Create</button>
     </form>
 
@@ -46,7 +42,7 @@ import axios from "axios";
 export default {
   data: function() {
     return {
-      message: 'This is the New Project Page',
+      message: 'Create New Project',
       errors: [],
       projects: [],
       newProjectTitle: "",
@@ -55,7 +51,6 @@ export default {
       newProjectStartDate: "",
       newProjectEndDate: "",
       newProjectPositions: "",
-      newUserId: "",
     };
   },
   created: function() {
@@ -69,7 +64,6 @@ export default {
         start_date: this.newProjectStartDate,
         end_date: this.newProjectEndDate,
         number_of_positions: this.newProjectPositions,
-        user_id: this.newUserId
       };
       axios.post("api/projects", params).then(response => {
         this.$router.push("/projects");
