@@ -72,6 +72,9 @@ export default {
         this.newProjectNote = "";
         this.message = "You've succesfully applied!";
       })
+      axios.post("api/notifications", params).then(response => {
+        console.log("Successfully pushed to notifications")
+      })
     }
   }
 };
