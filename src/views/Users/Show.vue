@@ -1,7 +1,7 @@
 <template>
   <div class="users-show">
     
-    <!-- {{ user }} -->
+    {{ user }}
     <h1>{{ user.first_name }} {{ user.last_name }}</h1>
     <img v-bind:src="user.image">
     <h3>Current Position: {{ user.current_job_title }}</h3>
@@ -34,6 +34,7 @@
       <h5>{{ application.project.description }}</h5>
       <h5>{{ application.project.address }}</h5>
       <h5>{{ application.project.start_date }} - {{ application.project.end_date }}</h5>
+      <h5>Offer Status: {{ application.offered }}</h5>
       <hr>
     </div>
     

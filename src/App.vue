@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/projects">Projects</router-link> |
-      <router-link to="/projects/new">New Project</router-link> |
+      <router-link v-if="isLoggedIn()" to="/projects">Projects</router-link> |
+      <router-link v-if="isLoggedIn()" to="/projects/new">New Project</router-link> |
       <router-link v-if="isLoggedIn()" to="/users/21">My Profile</router-link> |
       <router-link v-if="isLoggedIn()" to="/notifications">My Notifications</router-link> |
       <router-link v-if="!isLoggedIn()" to="/signup">Sign Up | </router-link> 

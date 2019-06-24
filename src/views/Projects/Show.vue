@@ -27,6 +27,13 @@
     </form>
     {{ message }}
 
+    <h1>Applicants</h1>
+    <div v-for="applicant in project.applicants">
+      <router-link v-bind:to="/users/ + applicant.id">{{ applicant.first_name }} {{ applicant.last_name }}</router-link>
+      <h5>{{ applicant.current_job_title }} </h5>
+      <hr>
+    </div>
+
   </div>
 </template>
 
