@@ -29,11 +29,14 @@
       <button type="submit" class="btn btn-success">Apply</button>
     </form>
     {{ message }}
+    <hr>
 
     <h1>Applicants</h1>
     <div v-for="applicant in project.applicants">
       <router-link v-bind:to="/users/ + applicant.id">{{ applicant.first_name }} {{ applicant.last_name }}</router-link>
       <h5>{{ applicant.current_job_title }} </h5>
+      <button v-on:click="hire()">Hire Applicant</button>
+      <button>Favorite</button>
       <hr>
     </div>
 
@@ -49,7 +52,7 @@ import moment from "moment";
 export default {
   data: function() {
     return {
-      message: 'This is the Project Show Page',
+      // message: 'This is the Project Show Page',
       project: {},
       newProjectNote: "",
       message: ""
@@ -78,13 +81,20 @@ export default {
         note: this.newProjectNote
       };
       axios.post("api/applications", params).then(response => {
-        // this.$router.push("/projects/" + this.project.id)
         this.newProjectNote = "";
         this.message = "You've succesfully applied!";
       })
-      axios.post("api/notifications", params).then(response => {
-        console.log("Successfully pushed to notifications")
-      })
+    },
+    hire: function(){
+      var params = {
+        offered: true
+      };
+      axios.patch("api/applications" + application.id, params).then(response => {
+        console.log("Success", response.data);
+      });
+    },
+    toggleFavorite: function(){
+      this.$emit('toggleFavorite', !this.is_fav);
     }
   }
 };
