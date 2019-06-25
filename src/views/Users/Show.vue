@@ -28,7 +28,7 @@
       <hr>
     </div>
     
-    <h1>Applications</h1>
+    <h1>My Applications</h1>
     <div v-for="application in user.applications">
       <router-link v-bind:to="'/projects/' + application.project.id">{{ application.project.title }}</router-link>
       <h5>{{ application.project.description }}</h5>
