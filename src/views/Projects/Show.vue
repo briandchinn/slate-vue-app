@@ -11,8 +11,8 @@
     <h3>End Date: {{ project.end_date }}</h3>
     <h3>Number of Positions: {{ project.number_of_positions }}</h3>
     <h3>Posted: {{ relativeDate(project.created_at) }}</h3>
-    <router-link v-bind:to="'/users/' + project.user.id">by {{ project.user.first_name }} {{ project.user.last_name }}</router-link>
-    <br>
+<!--     <router-link v-bind:to="'/users/' + project.user.id">by {{ project.user.first_name }} {{ project.user.last_name }}</router-link>
+ -->    <br>
     <br>
     <button>
     <router-link v-bind:to="'/projects/' + project.id + '/edit'">Edit Project</router-link>
@@ -89,7 +89,7 @@ export default {
       var params = {
         offered: true
       };
-      axios.patch("api/applications" + application.id, params).then(response => {
+      axios.patch("api/applications/38", params).then(response => {
         console.log("Success", response.data);
       });
     },

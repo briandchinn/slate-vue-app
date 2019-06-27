@@ -24,7 +24,7 @@
         </div>
         <div class="form-group">
           <label>Password confirmation:</label>
-          <input type="password" class="form-control" v-model="passwordConfirmation">
+          <input type="password" class="form-control" v-model="password_confirmation">
         </div>
         <div class="form-group">
           <label>Address:</label>
@@ -35,8 +35,8 @@
           <input type="text" class="form-control" v-model="phone_number">
         </div>
         <div class="form-group">
-          <label>User Photo:</label>
-          <input type="text" class="form-control" v-model="image">
+          <label for="image">Image</label>
+          <input type="file" class="form-control" id="image" v-on:change="setFile($event)" ref="fileInput">
         </div>
         <div class="form-group">
           <label>IMDB Link:</label>
@@ -66,7 +66,7 @@ export default {
       last_name: "",
       email: "",
       password: "",
-      passwordConfirmation: "",
+      password_confirmation: "",
       address: "",
       phone_number: "",
       image: "",
@@ -77,24 +77,29 @@ export default {
           };
         },
   methods: {
+    setFile: function(event) {
+      if (event.target.files.length > 0) {
+        this.image = event.target.files[0];
+      }
+    },
     submit: function() {
-      var params = {
-        first_name: this.first_name,
-        last_name: this.last_name,
-        email: this.email,
-        password: this.password,
-        password_confirmation: this.passwordConfirmation,
-        address: this.address,
-        phone_number: this.phone_number,
-        image: this.image,
-        imdb_url: this.imdb_url,
-        resume: this.resume,
-        current_job_title: this.current_job_title
-      };
+      var formData = new FormData();
+      formData.append("first_name", this.first_name);
+      formData.append("last_name", this.last_name);
+      formData.append("email", this.email);
+      formData.append("password", this.password);
+      formData.append("password_confirmation", this.password_confirmation);
+      formData.append("address", this.address);
+      formData.append("phone_number", this.phone_number);
+      formData.append("image", this.image);
+      formData.append("imdb_url", this.imdb_url);
+      formData.append("resume", this.resume);
+      formData.append("current_job_title", this.current_job_title);
+      
       axios
-        .post("/api/users", params)
+        .post("/api/users", formData)
         .then(response => {
-          this.$router.push("/users/" + user.id);
+          this.$router.push("/login" );
         })
         .catch(error => {
           this.errors = error.response.data.errors;
