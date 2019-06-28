@@ -35,6 +35,15 @@
       <h5>{{ application.project.address }}</h5>
       <h5>{{ application.project.start_date }} - {{ application.project.end_date }}</h5>
       <h5>Offer Status: {{ application.offered }}</h5>
+
+      <form v-on:submit.prevent="submit()">
+        <div class="form-group">
+          <label for="note">Note</label>
+          <input type="text" class="form-control" id="note" placeholder="Send a message to Project Owner" v-model="newProjectNote">
+        </div>
+        <button type="submit" class="btn btn-success">Accept</button>
+      </form>
+
       <hr>
     </div>
     
@@ -66,7 +75,17 @@ export default {
           console.log("Success!", response.data);
           this.$router.push("/");
         });
-    }
+    },
+    // submit: function(){
+    //   var params = {
+    //     project_id: this.project.id,
+    //     note: this.newProjectNote
+    //   };
+    //   axios.post("api/applications", params).then(response => {
+    //     this.newProjectNote = "";
+    //     this.message = "You've accepted this job!";
+    //   })
+    // },
   }
 };
 </script>

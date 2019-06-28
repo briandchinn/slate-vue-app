@@ -24,7 +24,7 @@
       </div>
       <div class="form-group">
         <label for="image">Image</label>
-        <input type="text" class="form-control" id="image" placeholder="" v-model="user.image">
+        <input type="file" class="form-control" id="image" v-on:change="setFile($event)" ref="fileInput">
       </div>      
       <div class="form-group">
         <label for="address">Address</label>
@@ -70,19 +70,24 @@ export default {
     });
   },
   methods: {
+    setFile: function(event) {
+      if (event.target.files.length > 0) {
+        this.image = event.target.files[0];
+      }
+    },
     submit: function(){
-      var params = {
-        first_name: this.user.first_name,
-        last_name: this.user.last_name,
-        email: this.user.email,
-        image: this.user.image,
-        address: this.user.address,
-        phone_number: this.user.phone_number,
-        imdb_url: this.user.imdb_url,
-        resume: this.user.resume,
-        current_job_title: this.user.current_job_title,
-      };
-      axios.patch("api/users/" + this.user.id, params).then(response => {
+      var formData = new FormData();
+      formData.append("first_name", this.user.first_name);
+      formData.append("last_name", this.user.last_name);
+      formData.append("email", this.user.email);
+      formData.append("image", this.user.image);
+      formData.append("address", this.user.address);
+      formData.append("phone_number", this.user.phone_number);
+      formData.append("imdb_url", this.user.imdb_url);
+      formData.append("resume", this.user.resume);
+      formData.append("current_job_title", this.user.current_job_title);
+      
+      axios.patch("api/users/" + this.user.id, formData).then(response => {
         console.log("Success!", response.data)
         this.$router.push("/users/" + this.user.id);
       }).catch(error => {
