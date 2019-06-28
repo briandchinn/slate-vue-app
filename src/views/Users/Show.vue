@@ -35,11 +35,12 @@
       <h5>{{ application.project.address }}</h5>
       <h5>{{ application.project.start_date }} - {{ application.project.end_date }}</h5>
       <h5>Offer Status: {{ application.offered }}</h5>
+      <h5>Accepted Status: {{ application.accepted }}</h5>
 
-      <form v-on:submit.prevent="submit()">
+      <form v-on:submit.prevent="submit(application)">
         <div class="form-group">
           <label for="note">Note</label>
-          <input type="text" class="form-control" id="note" placeholder="Send a message to Project Owner" v-model="newProjectNote">
+          <input type="text" class="form-control" id="note" placeholder="Send a message to Project Owner" v-model="newAcceptedNote">
         </div>
         <button type="submit" class="btn btn-success">Accept</button>
       </form>
@@ -60,6 +61,8 @@ export default {
     return {
       message: 'This is a Users Show Page',
       user: {},
+      newAcceptedNote: "",
+      application: {}
     };
   },
   created: function() {
@@ -76,16 +79,15 @@ export default {
           this.$router.push("/");
         });
     },
-    // submit: function(){
-    //   var params = {
-    //     project_id: this.project.id,
-    //     note: this.newProjectNote
-    //   };
-    //   axios.post("api/applications", params).then(response => {
-    //     this.newProjectNote = "";
-    //     this.message = "You've accepted this job!";
-    //   })
-    // },
+    submit: function(application){
+      var params = {
+        accepted: true
+      };
+      axios.patch("api/applications/"+ application.id, params).then(response => {
+        this.newAcceptedNote = "";
+        this.message = "You've accepted this job!";
+      })
+    }
   }
 };
 </script>

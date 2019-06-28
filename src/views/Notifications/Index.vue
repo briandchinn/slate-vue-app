@@ -3,7 +3,7 @@
     <h1>{{ message }}</h1>
 
     <div v-for="notification in notifications">
-      <h3>Note: {{ notification.note }}</h3>
+      <h3>{{ notification.note }}</h3>
       <button v-on:click="destroy(notification)">Destroy Notification</button>
       <hr>
     </div>
