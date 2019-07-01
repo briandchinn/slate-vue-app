@@ -8,6 +8,7 @@
       <router-link v-if="!isLoggedIn()" to="/signup">Sign Up | </router-link> 
       <router-link v-if="!isLoggedIn()" to="/login">Login |</router-link>
       <router-link v-if="isLoggedIn()" to="/logout">Logout</router-link>
+      <p v-if="isLoggedIn()">You are logged in as: {{ firstname}} {{ lastname }}</p>
     </div>
     <router-view/>
 
@@ -45,7 +46,12 @@ export default {
   data: function() {
     return {
       user: {},
+      firstname: localStorage.getItem('firstname'),
+      lastname: localStorage.getItem('lastname'),
+      user_id: localStorage.getItem('user_id'),
+      image: localStorage.getItem('image'),
     };
+
   },
   created: function() {
   },

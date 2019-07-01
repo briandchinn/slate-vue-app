@@ -45,7 +45,7 @@
       <h5>Email: {{ application.user.email }} </h5>
       <img v-bind:src="application.user.image" alt="user images" width="50"><br>
       <button v-on:click="hire(application)">Hire Applicant</button>
-      <button>Favorite</button>
+      <button v-on:click="favorite(application)">Favorite</button>
       <hr>
     </div>
 
@@ -98,6 +98,14 @@ export default {
     hire: function(application){
       var params = {
         offered: true
+      };
+      axios.patch("api/applications/" + application.id, params).then(response => {
+        console.log("Success", response.data);
+      });
+    },
+    favorite: function(application){
+      var params = {
+        favorite: true
       };
       axios.patch("api/applications/" + application.id, params).then(response => {
         console.log("Success", response.data);
