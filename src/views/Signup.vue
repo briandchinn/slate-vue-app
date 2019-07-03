@@ -48,11 +48,29 @@
         </div>
         <div class="form-group">
           <label>Current Job Title:</label>
-          <input type="text" class="form-control" v-model="current_job_title">
+          <input type="text" class="form-control" list="titles" v-model="current_job_title">
         </div>
         <input type="submit" class="btn btn-primary" value="Submit">
+        <datalist id="titles">
+          <option value="1st Assistant Director"></option>
+          <option value="2nd Assistant Director"></option>
+          <option value="2nd 2nd Assistant Director"></option>
+          <option value="Key Set Production Assistant"></option>
+          <option value="Basecamp Production Assistant"></option>
+          <option value="Production Assistant"></option>
+        </datalist>
       </form>
     </div>
+
+<!--     <datalist id="titles">
+      <option value="1st Assistant Director">
+      <option value="2nd Assistant Director">
+      <option value="2nd 2nd Assistant Director">
+      <option value="Key Set Production Assistant">
+      <option value="Basecamp Production Assistant">
+      <option value="Production Assistant">
+    </datalist> -->
+
   </div>
 </template>
 
