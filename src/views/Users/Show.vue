@@ -1,7 +1,7 @@
 <template>
   <div class="users-show">
     
-    <!-- {{ user }} -->
+    {{ user }}
     <h1>{{ user.first_name }} {{ user.last_name }}</h1>
     <img v-bind:src="user.image">
     <h3>Current Position: {{ user.current_job_title }}</h3>
@@ -10,11 +10,13 @@
     <h3>Address: {{ user.address }}</h3>
     <h3>Phone Number: {{ user.phone_number }}</h3>
     <h3>Resume: {{ user.resume }}</h3>
-    <button>
-      <router-link v-bind:to="'/users/' + user.id + '/edit'">Edit User</router-link>
-    </button>
-
-    <button v-on:click="destroy(user)">Destroy User</button>
+    
+    <template v-if="user.id == $parent.user_id">
+      <button>
+        <router-link v-bind:to="'/users/' + user.id + '/edit'">Edit User</router-link>
+      </button>
+      <button v-on:click="destroy(user)">Destroy User</button>
+    </template>
 
     <br>
     <hr>
@@ -28,7 +30,7 @@
       <hr>
     </div>
     
-    <h1>My Applications</h1>
+    <h1 v-if="user.id == $parent.user_id">My Applications</h1>
     <div v-for="application in user.applications">
       <router-link v-bind:to="'/projects/' + application.project.id">{{ application.project.title }}</router-link>
       <h5>{{ application.project.description }}</h5>

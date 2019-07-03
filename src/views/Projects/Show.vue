@@ -13,10 +13,14 @@
     <router-link v-bind:to="'/users/' + project.user.id">by {{ project.user.first_name }} {{ project.user.last_name }}</router-link>
     <br>
     <br>
-    <button>
-    <router-link v-bind:to="'/projects/' + project.id + '/edit'">Edit Project</router-link>
-    </button>    
-    <button v-on:click="destroy(project)">Destroy Project</button>
+
+    <template v-if="project.user.id == $parent.user_id">
+      <button>
+        <router-link v-bind:to="'/projects/' + project.id + '/edit'">Edit Project</router-link>
+      </button>
+      <button v-on:click="destroy(project)">Destroy Project</button>
+    </template>
+
     <hr>
 
     <template v-if="project.user.id != $parent.user_id">
