@@ -3,7 +3,7 @@
     <div id="nav">
       <router-link v-if="isLoggedIn()" to="/projects">Projects</router-link> |
       <router-link v-if="isLoggedIn()" to="/projects/new">New Project</router-link> |
-      <router-link v-if="isLoggedIn()" to="/users/28">My Profile</router-link> |
+      <router-link v-if="isLoggedIn()" :to="`/users/${user_id}`">My Profile</router-link> |
       <router-link v-if="isLoggedIn()" to="/notifications">My Notifications</router-link> |
       <router-link v-if="!isLoggedIn()" to="/signup">Sign Up | </router-link> 
       <router-link v-if="!isLoggedIn()" to="/login">Login |</router-link>
