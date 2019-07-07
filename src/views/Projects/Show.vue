@@ -50,7 +50,13 @@
         <h5>Last Name: {{ application.user.last_name }} </h5>
         <h5>Email: {{ application.user.email }} </h5>
         <img v-bind:src="application.user.image" alt="user images" width="50"><br>
-        <button v-on:click="hire(application)">Hire Applicant</button>
+
+        <div v-if="application.offered == !true">
+          <button v-on:click="hire(application)">Hire Applicant</button>
+        </div>
+        <div v-else>
+          <h4>You offered {{application.user.first_name}} {{application.user.last_name}} the Job</h4>
+        </div>
 
         <div v-if="application.favorite == true ">
           <font-awesome-icon @click='favorite(application)' :icon="[`fas`,`star`]" size="lg" style="color:gold"/>
