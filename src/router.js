@@ -11,6 +11,7 @@ import NotificationsIndex from './views/Notifications/Index.vue'
 import Signup from './views/Signup.vue'
 import Login from './views/Login.vue'
 import Logout from './views/Logout.vue'
+import Test from './views/Test.vue'
 
 Vue.use(Router)
 
@@ -72,6 +73,11 @@ export default new Router({
       path: '/logout',
       name: 'logout',
       component: Logout
+    },
+    {
+      path: '/test',
+      name: 'test',
+      component: Test
     },
   ]
 })

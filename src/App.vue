@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+
     <div id="nav">
       <router-link v-if="isLoggedIn()" to="/projects">Projects</router-link> |
       <router-link v-if="isLoggedIn()" to="/projects/new">New Project</router-link> |
@@ -43,6 +44,7 @@
 import axios from "axios";
 
 export default {
+  name: 'App',
   data: function() {
     return {
       user: {},

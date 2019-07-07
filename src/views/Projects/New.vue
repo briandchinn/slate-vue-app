@@ -31,13 +31,15 @@
       </div>
       <button type="submit" class="btn btn-success">Create</button>
     </form>
-
+    
   </div>
 </template>
 
 <script>
 
+
 import axios from "axios";
+import Datepicker from 'vuejs-datepicker';
 
 export default {
   data: function() {
@@ -70,7 +72,11 @@ export default {
       }).catch(error => {
         this.errors = error.response.data.errors;
       });
-    }
+    },
+  },
+  components: {
+    Datepicker
   }
 };
+
 </script>

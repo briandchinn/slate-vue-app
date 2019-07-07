@@ -10,7 +10,7 @@
     <h3>End Date: {{ project.end_date }}</h3>
     <h3>Number of Positions: {{ project.number_of_positions }}</h3>
     <h3>Posted: {{ relativeDate(project.created_at) }}</h3>
-    <router-link v-bind:to="'/users/' + project.user.id">by {{ project.user.first_name }} {{ project.user.last_name }}</router-link>
+    <!-- <router-link v-bind:to="'/users/' + project.user.id">by {{ project.user.first_name }} {{ project.user.last_name }}</router-link> -->
     <br>
     <br>
 
@@ -39,7 +39,7 @@
     <template v-if="project.user.id == $parent.user_id">
       <h1>Applicants</h1>
       <div v-for="application in project.applications">
-        <router-link v-bind:to="/users/ + application.user_id">{{ application.user.first_name }}</router-link>
+       <!--  <router-link v-bind:to="/users/ + application.user_id">{{ application.user.first_name }}</router-link> -->
         <h5>Application ID: {{ application.id }} </h5>
         <h5>Note: {{ application.note }} </h5>
         <h5>Offer Status: {{ application.offered }} </h5>
@@ -51,7 +51,14 @@
         <h5>Email: {{ application.user.email }} </h5>
         <img v-bind:src="application.user.image" alt="user images" width="50"><br>
         <button v-on:click="hire(application)">Hire Applicant</button>
-        <button v-on:click="favorite(application)">Favorite</button>
+
+        <div v-if="application.favorite == true ">
+          <font-awesome-icon @click='favorite(application)' :icon="[`fas`,`star`]" size="lg" style="color:gold"/>
+        </div>
+        <div v-else>
+          <font-awesome-icon @click='favorite(application)' :icon="[`fas`,`star`]" size="lg" style="color:grey"/>
+        </div>
+
         <hr>
       </div>
     </template>
@@ -112,7 +119,7 @@ export default {
     },
     favorite: function(application){
       var params = {
-        favorite: true
+        favorite: !application.favorite
       };
       axios.patch("api/applications/" + application.id, params).then(response => {
         console.log("Success", response.data);
