@@ -68,7 +68,7 @@ export default {
   data: function() {
     return {
       user: {},
-      errors: []
+      errors: [],
     };
   },
   created: function() {
@@ -80,7 +80,7 @@ export default {
   methods: {
     setFile: function(event) {
       if (event.target.files.length > 0) {
-        this.image = event.target.files[0];
+        this.user.image = event.target.files[0];
       }
     },
     submit: function(){
