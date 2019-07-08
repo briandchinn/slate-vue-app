@@ -39,7 +39,7 @@
       <h5>Offer Status: {{ application.offered }}</h5>
       <h5>Accepted Status: {{ application.accepted }}</h5>
 
-      <form v-on:submit.prevent="submit(application)">
+      <form v-if="application.offered == true && application.accepted == false" v-on:submit.prevent="submit(application)">
         <div class="form-group">
           <label for="note">Note</label>
           <input type="text" class="form-control" id="note" placeholder="Send a message to Project Owner" v-model="newAcceptedNote">
