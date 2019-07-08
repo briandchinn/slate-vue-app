@@ -1,7 +1,7 @@
 <template>
   <div class="users-show">
     
-    {{ user }}
+    <!-- {{ user }} -->
     <h1>{{ user.first_name }} {{ user.last_name }}</h1>
     <img v-bind:src="user.image">
     <h3>Current Position: {{ user.current_job_title }}</h3>
@@ -30,14 +30,37 @@
       <hr>
     </div>
     
+    <!-- My Applications Section -->
     <h1 v-if="user.id == $parent.user_id">My Applications</h1>
-    <div v-for="application in user.applications">
+    
+    <div class="form-group">
+      <button v-on:click="setSortAttribute('offered')">Sort by Offer Status
+        <span v-if="sortAttribute === 'offered' && sortAscending === 1">^</span>
+        <span v-if="sortAttribute === 'offered' && sortAscending === -1">V</span>
+      </button>
+    </div>
+    <div class="form-group">
+      <button v-on:click="setSortAttribute('accepted')">Sort by Accepted
+        <span v-if="sortAttribute === 'accepted' && sortAscending === 1">^</span>
+        <span v-if="sortAttribute === 'accepted' && sortAscending === -1">V</span>
+      </button>
+    </div>
+    <div class="form-group">
+      <button v-on:click="setSortAttribute('created')">Sort by created
+        <span v-if="sortAttribute === 'created' && sortAscending === 1">^</span>
+        <span v-if="sortAttribute === 'created' && sortAscending === -1">V</span>
+      </button>
+    </div>
+    <br>
+
+    <div v-for="application in orderBy(filterBy(user.applications, filter, 'offered', 'accepted', 'created'), sortAttribute, sortAscending)">
       <router-link v-bind:to="'/projects/' + application.project.id">{{ application.project.title }}</router-link>
       <h5>{{ application.project.description }}</h5>
       <h5>{{ application.project.address }}</h5>
       <h5>{{ application.project.start_date }} - {{ application.project.end_date }}</h5>
       <h5>Offer Status: {{ application.offered }}</h5>
       <h5>Accepted Status: {{ application.accepted }}</h5>
+      <h5>Created: {{ application.created }}</h5>
 
       <form v-if="application.offered == true && application.accepted == false" v-on:submit.prevent="submit(application)">
         <div class="form-group">
@@ -49,7 +72,7 @@
 
       <hr>
     </div>
-    
+    <!-- End of My Applications Section -->
 
   </div>
 </template>
@@ -57,19 +80,25 @@
 <script>
 
 import axios from "axios";
+import Vue2Filters from "vue2-filters";
+
 
 export default {
+  mixins: [Vue2Filters.mixin],
   data: function() {
     return {
-      message: 'This is a Users Show Page',
       user: {},
       newAcceptedNote: "",
-      application: {}
+      application: {},
+      sortAttribute: "",
+      sortAscending: 1,
+      filter:""
     };
   },
   created: function() {
     axios.get("/api/users/" + this.$route.params.id).then(response => {
       this.user = response.data;
+      console.log("Success", response.data)
     });
   },
   methods: {
@@ -89,6 +118,14 @@ export default {
         this.newAcceptedNote = "";
         this.message = "You've accepted this job!";
       })
+    },
+    setSortAttribute: function(attribute){
+      if (this.sortAttribute = attribute) {
+        this.sortAscending = this.sortAscending * -1;
+      } else {
+        this.sortAscending = 1;
+      }
+      this.sortAttribute = attribute;
     }
   }
 };
