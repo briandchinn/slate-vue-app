@@ -1,5 +1,7 @@
 <template>
   <div class="notifications-index">
+
+    {{ notifications }}
     <h1>{{ message }}</h1>
 
     <div v-for="notification in notifications">

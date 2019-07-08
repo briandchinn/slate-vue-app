@@ -15,7 +15,8 @@
         <span v-if="sortAttribute === 'created_at' && sortAscending === 1">^</span>
         <span v-if="sortAttribute === 'created_at' && sortAscending === -1">V</span>
       </button>
-    </div><br>
+    </div>
+    <br>
 
     <h1>{{ message }}</h1>
 
@@ -26,8 +27,7 @@
       <h3>Posted: {{ relativeDate(project.created_at) }} by
       <router-link v-bind:to="'/users/' + project.user.id">{{ project.user.first_name }} {{ project.user.last_name }}</router-link>
       </h3>
-<!--       <h3>Posted: {{ relativeDate(project.created_at) }}</h3>
- -->      <button>
+      <button>
         <router-link v-bind:to="'/projects/' + project.id">View Details</router-link>
       </button>
       <hr>

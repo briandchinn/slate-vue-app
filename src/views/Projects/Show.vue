@@ -2,27 +2,32 @@
   <div class="projects-show">
     
     {{ project }}
-    <h1>{{ message }}</h1>
-    <h3>Title: {{ project.title }}</h3>
-    <h3>Description: {{ project.description }}</h3>
-    <h3>Address: {{ project.address }}</h3>
-    <h3>Start Date: {{ project.start_date }}</h3>
-    <h3>End Date: {{ project.end_date }}</h3>
-    <h3>Number of Positions: {{ project.number_of_positions }}</h3>
-    <h3>Posted: {{ relativeDate(project.created_at) }}</h3>
-    <!-- <router-link v-bind:to="'/users/' + project.user.id">by {{ project.user.first_name }} {{ project.user.last_name }}</router-link> -->
-    <br>
-    <br>
 
-    <template v-if="project.user.id == $parent.user_id">
-      <button>
-        <router-link v-bind:to="'/projects/' + project.id + '/edit'">Edit Project</router-link>
-      </button>
-      <button v-on:click="destroy(project)">Destroy Project</button>
-    </template>
+    <!-- Project Details -->
+    <div>
+      <h1>{{ message }}</h1>
+      <h3>Title: {{ project.title }}</h3>
+      <h3>Description: {{ project.description }}</h3>
+      <h3>Address: {{ project.address }}</h3>
+      <h3>Start Date: {{ project.start_date }}</h3>
+      <h3>End Date: {{ project.end_date }}</h3>
+      <h3>Number of Positions: {{ project.number_of_positions }}</h3>
+      <h3>Posted: {{ relativeDate(project.created_at) }}</h3>
+      <router-link v-bind:to="'/users/' + project.user.id">by {{ project.user.first_name }} {{ project.user.last_name }}</router-link>
+      <br>
+      <br>
 
+      <template v-if="project.user.id == $parent.user_id">
+        <button>
+          <router-link v-bind:to="'/projects/' + project.id + '/edit'">Edit Project</router-link>
+        </button>
+        <button v-on:click="destroy(project)">Destroy Project</button>
+      </template>
+    </div>
+    <!-- End of Project Details -->
     <hr>
-
+    
+    <!-- Application Section --> 
     <template v-if="project.user.id != $parent.user_id">
       <h1>Would You Like to Apply?</h1>
       <form v-on:submit.prevent="submit()">
@@ -35,12 +40,37 @@
       {{ message }}
       <hr>
     </template>
+    <!-- End of Application Section -->
 
+    <!-- Applicants Section -->
     <template v-if="project.user.id == $parent.user_id">
+
       <h1>Applicants</h1>
-      <div v-for="application in project.applications">
-       <!--  <router-link v-bind:to="/users/ + application.user_id">{{ application.user.first_name }}</router-link> -->
+
+      <div class="form-group">
+        <button v-on:click="setSortAttribute('offered')">Sort by Offer Status
+          <span v-if="sortAttribute === 'offered' && sortAscending === 1">^</span>
+          <span v-if="sortAttribute === 'offered' && sortAscending === -1">V</span>
+        </button>
+      </div>
+      <div class="form-group">
+        <button v-on:click="setSortAttribute('created')">Sort by Date
+          <span v-if="sortAttribute === 'created' && sortAscending === 1">^</span>
+          <span v-if="sortAttribute === 'created' && sortAscending === -1">V</span>
+        </button>
+      </div>
+      <div class="form-group">
+        <button v-on:click="setSortAttribute('favorite')">Sort by Favorite
+          <span v-if="sortAttribute === 'favorite' && sortAscending === 1">^</span>
+          <span v-if="sortAttribute === 'favorite' && sortAscending === -1">V</span>
+        </button>
+      </div>
+      <br>
+
+      <div v-for="application in orderBy(filterBy(project.applications, filter, 'offered', 'created', 'favorite'), sortAttribute, sortAscending)">
+        <router-link v-bind:to="/users/ + application.user_id">{{ application.user.first_name }}</router-link>
         <h5>Application ID: {{ application.id }} </h5>
+        <h5>Created: {{ application.created }} </h5>
         <h5>Note: {{ application.note }} </h5>
         <h5>Offer Status: {{ application.offered }} </h5>
         <h5>Accepted Status: {{ application.accepted }} </h5>
@@ -58,7 +88,7 @@
           <h4>You offered {{application.user.first_name}} {{application.user.last_name}} the Job</h4>
         </div>
 
-        <div v-if="application.favorite == true ">
+        <div v-if="application.favorite">
           <font-awesome-icon @click='favorite(application)' :icon="[`fas`,`star`]" size="lg" style="color:gold"/>
         </div>
         <div v-else>
@@ -68,7 +98,8 @@
         <hr>
       </div>
     </template>
-    
+    <!-- End of Applicants Section -->
+
   </div>
 </template>
 
@@ -76,15 +107,20 @@
 
 import axios from "axios";
 import moment from "moment";
+import Vue2Filters from "vue2-filters";
 
 
 export default {
+  mixins: [Vue2Filters.mixin],
   data: function() {
     return {
       project: {},
       application: {},
       newProjectNote: "",
-      message: ""
+      message: "",
+      sortAttribute: "",
+      sortAscending: 1,
+      filter:""
     };
   },
   created: function() {
@@ -124,13 +160,22 @@ export default {
       });
     },
     favorite: function(application){
+      // this.myFavorite = !this.myFavorite
       var params = {
-        favorite: !application.favorite
+        favorite: false
       };
       axios.patch("api/applications/" + application.id, params).then(response => {
         console.log("Success", response.data);
       });
     },
+    setSortAttribute: function(attribute){
+      if (this.sortAttribute = attribute) {
+        this.sortAscending = this.sortAscending * -1;
+      } else {
+        this.sortAscending = 1;
+      }
+      this.sortAttribute = attribute;
+    }
   }
 };
 </script>
