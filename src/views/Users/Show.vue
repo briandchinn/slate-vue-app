@@ -1,7 +1,7 @@
 <template>
   <div class="users-show">
     
-    <!-- {{ user }} -->
+    {{ user }}
     <h1>{{ user.first_name }} {{ user.last_name }}</h1>
     <img v-bind:src="user.image">
     <h3>Current Position: {{ user.current_job_title }}</h3>
@@ -22,7 +22,16 @@
     <hr>
 
     <h1>{{ user.first_name }} {{ user.last_name }}'s Projects</h1>
+    
+    <div>
+      <h3 v-if="user.projects == false">No Existing Projects</h3>
+      <button v-if="user.id == $parent.user_id">
+        <router-link v-bind:to="'/projects/new'">Create New Project</router-link>
+      </button>
+    </div>
+    
     <div v-for="project in user.projects">
+      <br>
       <router-link v-bind:to="'/projects/' + project.id">{{ project.title }}</router-link>
       <h5>{{ project.description }}</h5>
       <h5>{{ project.address }}</h5>
