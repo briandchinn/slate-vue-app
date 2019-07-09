@@ -38,10 +38,18 @@
       <h5>{{ newDate(project.start_date) }} - {{ newDate(project.end_date) }}</h5>
       <hr>
     </div>
-    
+    <hr>
     <!-- My Applications Section -->
     <h1 v-if="user.id == $parent.user_id">My Applications</h1>
-    
+
+    <div>
+      <h3 v-if="user.applications == false">No Existing Applications</h3>
+      <button v-if="user.id == $parent.user_id">
+        <router-link v-bind:to="'/projects'">Browse Current Projects</router-link>
+      </button>
+    </div>
+    <br>
+
     <div class="form-group">
       <button v-on:click="setSortAttribute('offered')">Sort by Offer Status
         <span v-if="sortAttribute === 'offered' && sortAscending === 1">^</span>
