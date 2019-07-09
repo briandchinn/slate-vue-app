@@ -9,8 +9,8 @@
       <h3>Title: {{ project.title }}</h3>
       <h3>Description: {{ project.description }}</h3>
       <h3>Address: {{ project.address }}</h3>
-      <h3>Start Date: {{ project.start_date }}</h3>
-      <h3>End Date: {{ project.end_date }}</h3>
+      <h3>Start Date: {{ newDate(project.start_date) }}</h3>
+      <h3>End Date: {{ newDate(project.end_date) }}</h3>
       <h3>Number of Positions: {{ project.number_of_positions }}</h3>
       <h3>Posted: {{ relativeDate(project.created_at) }}</h3>
       <router-link v-bind:to="'/users/' + project.user.id">by {{ project.user.first_name }} {{ project.user.last_name }}</router-link>
@@ -89,10 +89,10 @@
         </div>
 
         <div v-if="application.favorite">
-          <font-awesome-icon @click='favorite(application)' :icon="[`fas`,`star`]" size="lg" style="color:gold"/>
+          <font-awesome-icon @click='unFavorite(application)' :icon="[`fas`,`star`]" size="lg" style="color:gold"/>
         </div>
         <div v-else>
-          <font-awesome-icon @click='favorite(application)' :icon="[`fas`,`star`]" size="lg" style="color:grey"/>
+          <font-awesome-icon @click='unFavorite(application)' :icon="[`fas`,`star`]" size="lg" style="color:grey"/>
         </div>
 
         <hr>
@@ -120,7 +120,8 @@ export default {
       message: "",
       sortAttribute: "",
       sortAscending: 1,
-      filter:""
+      filter:"",
+      myFavorite: false,
     };
   },
   created: function() {
@@ -141,6 +142,9 @@ export default {
     relativeDate: function(date) {
       return moment(date).fromNow();
     },
+    newDate: function(date) {
+      return moment(date).format('MMMM Do YYYY');
+    },
     submit: function(){
       var params = {
         project_id: this.project.id,
@@ -160,7 +164,14 @@ export default {
       });
     },
     favorite: function(application){
-      // this.myFavorite = !this.myFavorite
+      var params = {
+        favorite: true
+      };
+      axios.patch("api/applications/" + application.id, params).then(response => {
+        console.log("Success", response.data);
+      });
+    },
+    unFavorite: function(application){
       var params = {
         favorite: false
       };

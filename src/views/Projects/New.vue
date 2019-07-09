@@ -19,12 +19,24 @@
       </div>
       <div class="form-group">
         <label for="start_date">Start Date</label>
-        <input type="text" class="form-control" id="start_date" placeholder="" v-model="newProjectStartDate">
+        <template>
+          <vue-pikaday 
+            v-model="newProjectStartDate"
+            placeholder="Start Date"
+            :options="pickadayOptions"
+          />
+        </template>
       </div>
       <div class="form-group">
-        <label for="end_date">End Date</label>
-        <input type="text" class="form-control" id="end_date" placeholder="" v-model="newProjectEndDate">
-      </div>      
+        <label for="start_date">End Date</label>
+        <template>
+          <vue-pikaday 
+            v-model="newProjectEndDate"
+            placeholder="End Date"
+            :options="pickadayOptions"
+          />
+        </template>
+      </div>
       <div class="form-group">
         <label for="number_of_positions">Number of Positions</label>
         <input type="number" class="form-control" id="number_of_positions" placeholder="" v-model="newProjectPositions">
@@ -40,6 +52,8 @@
 
 import axios from "axios";
 import Datepicker from 'vuejs-datepicker';
+import VuePikaday from '@enrian/vue-pikaday';
+
 
 export default {
   data: function() {
@@ -50,9 +64,12 @@ export default {
       newProjectTitle: "",
       newProjectDescription: "",
       newProjectAddress: "",
-      newProjectStartDate: "",
-      newProjectEndDate: "",
+      newProjectStartDate: null,
+      newProjectEndDate: null,
       newProjectPositions: "",
+      pickadayOptions: {
+        format: 'MM/DD/YYYY',
+        },
     };
   },
   created: function() {
@@ -73,10 +90,11 @@ export default {
         this.errors = error.response.data.errors;
       });
     },
+    clear() {
+      this.newProjectStartDate = null;
+      this.newProjectEndDate = null;
+    },
   },
-  components: {
-    Datepicker
-  }
 };
 
 </script>

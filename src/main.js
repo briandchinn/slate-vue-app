@@ -5,6 +5,9 @@ import axios from "axios";
 import { dom, library } from '@fortawesome/fontawesome-svg-core'
 import { faStar } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import VuePikaday from '@enrian/vue-pikaday';
+
+Vue.use(VuePikaday);
 
 axios.defaults.baseURL = 
   process.env.NODE_ENV === "development" ? "http://localhost:3000" : "/";
@@ -28,3 +31,4 @@ new Vue({
   router,
   render: h => h(App)
 }).$mount('#app')
+
