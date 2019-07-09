@@ -26,7 +26,7 @@
       <router-link v-bind:to="'/projects/' + project.id">{{ project.title }}</router-link>
       <h5>{{ project.description }}</h5>
       <h5>{{ project.address }}</h5>
-      <h5>{{ project.start_date }} - {{ project.end_date }}</h5>
+      <h5>{{ newDate(project.start_date) }} - {{ newDate(project.end_date) }}</h5>
       <hr>
     </div>
     
@@ -57,10 +57,10 @@
       <router-link v-bind:to="'/projects/' + application.project.id">{{ application.project.title }}</router-link>
       <h5>{{ application.project.description }}</h5>
       <h5>{{ application.project.address }}</h5>
-      <h5>{{ application.project.start_date }} - {{ application.project.end_date }}</h5>
+      <h5>{{ newDate(application.project.start_date) }} - {{ newDate(application.project.end_date) }}</h5>
       <h5>Offer Status: {{ application.offered }}</h5>
       <h5>Accepted Status: {{ application.accepted }}</h5>
-      <h5>Created: {{ application.created }}</h5>
+      <h5>Created: {{ newDate(application.created) }}</h5>
 
       <form v-if="application.offered == true && application.accepted == false" v-on:submit.prevent="submit(application)">
         <div class="form-group">
@@ -81,6 +81,7 @@
 
 import axios from "axios";
 import Vue2Filters from "vue2-filters";
+import moment from "moment";
 
 
 export default {
@@ -126,7 +127,10 @@ export default {
         this.sortAscending = 1;
       }
       this.sortAttribute = attribute;
-    }
+    },
+    newDate: function(date) {
+      return moment(date).format('MMMM Do YYYY');
+    },
   }
 };
 </script>

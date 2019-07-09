@@ -40,7 +40,7 @@
       </div>
       <div class="form-group">
         <label for="resume">Resume</label>
-        <input type="text" class="form-control" id="resume" placeholder="" v-model="user.resume">
+        <input type="file" class="form-control" id="resume" v-on:change="setResumeFile($event)" ref="fileInput">
       </div>
       <div class="form-group">
         <label for="current_job_title">Current Position</label>
@@ -81,6 +81,11 @@ export default {
     setFile: function(event) {
       if (event.target.files.length > 0) {
         this.user.image = event.target.files[0];
+      }
+    },
+    setResumeFile: function(event) {
+      if (event.target.files.length > 0) {
+        this.user.resume = event.target.files[0];
       }
     },
     submit: function(){
