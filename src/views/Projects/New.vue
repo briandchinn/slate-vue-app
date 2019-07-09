@@ -29,7 +29,7 @@
         </template>
       </div>
       <div class="form-group">
-        <label for="start_date">End Date</label>
+        <label for="end_date">End Date</label>
         <template>
           <vue-pikaday 
             v-model="newProjectEndDate"
@@ -45,7 +45,7 @@
       <button type="submit" class="btn btn-success">Create</button>
     </form>
     <!-- End of Form -->
-    
+
   </div>
 </template>
 
