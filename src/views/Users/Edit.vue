@@ -7,6 +7,7 @@
       <li v-for="error in errors">{{ error }}</li>
     </ul>
 
+    <!-- Beginning of Edit Form -->
     <form v-on:submit.prevent="submit()">
       <div class="form-row">
         <div class="form-group col-md-6">
@@ -56,7 +57,8 @@
         <option value="Production Assistant"></option>
       </datalist>
     </form>
-
+    <!-- End of Edit Form -->
+    
   </div>
 </template>
 
