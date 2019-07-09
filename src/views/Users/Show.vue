@@ -9,7 +9,7 @@
     <h3>Email: {{ user.email }}</h3>
     <h3>Address: {{ user.address }}</h3>
     <h3>Phone Number: {{ user.phone_number }}</h3>
-    <h3>Resume: {{ user.resume }}</h3>
+    <h3><a :href="user.resume" target="_blank">Click to Download Resume</a></h3>
     
     <template v-if="user.id == $parent.user_id">
       <button>
