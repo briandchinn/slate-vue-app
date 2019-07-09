@@ -44,29 +44,31 @@
 
     <div>
       <h3 v-if="user.applications == false">No Existing Applications</h3>
-      <button v-if="user.id == $parent.user_id">
+      <button v-if="user.id == $parent.user_id && user.applications == false">
         <router-link v-bind:to="'/projects'">Browse Current Projects</router-link>
       </button>
     </div>
     <br>
-
-    <div class="form-group">
-      <button v-on:click="setSortAttribute('offered')">Sort by Offer Status
-        <span v-if="sortAttribute === 'offered' && sortAscending === 1">^</span>
-        <span v-if="sortAttribute === 'offered' && sortAscending === -1">V</span>
-      </button>
-    </div>
-    <div class="form-group">
-      <button v-on:click="setSortAttribute('accepted')">Sort by Accepted
-        <span v-if="sortAttribute === 'accepted' && sortAscending === 1">^</span>
-        <span v-if="sortAttribute === 'accepted' && sortAscending === -1">V</span>
-      </button>
-    </div>
-    <div class="form-group">
-      <button v-on:click="setSortAttribute('created')">Sort by created
-        <span v-if="sortAttribute === 'created' && sortAscending === 1">^</span>
-        <span v-if="sortAttribute === 'created' && sortAscending === -1">V</span>
-      </button>
+    
+    <div v-if="user.id == $parent.user_id">
+      <div class="form-group">
+        <button v-on:click="setSortAttribute('offered')">Sort by Offer Status
+          <span v-if="sortAttribute === 'offered' && sortAscending === 1">^</span>
+          <span v-if="sortAttribute === 'offered' && sortAscending === -1">V</span>
+        </button>
+      </div>
+      <div class="form-group">
+        <button v-on:click="setSortAttribute('accepted')">Sort by Accepted
+          <span v-if="sortAttribute === 'accepted' && sortAscending === 1">^</span>
+          <span v-if="sortAttribute === 'accepted' && sortAscending === -1">V</span>
+        </button>
+      </div>
+      <div class="form-group">
+        <button v-on:click="setSortAttribute('created')">Sort by created
+          <span v-if="sortAttribute === 'created' && sortAscending === 1">^</span>
+          <span v-if="sortAttribute === 'created' && sortAscending === -1">V</span>
+        </button>
+      </div>
     </div>
     <br>
 
