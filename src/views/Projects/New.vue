@@ -2,6 +2,7 @@
   <div class="projects-new">
     <h1>{{ message }}</h1>
     
+    <!-- Beggining of Form -->
     <form v-on:submit.prevent="submit()">
       <div class="form-row">
         <div class="form-group col-md-6">
@@ -43,6 +44,7 @@
       </div>
       <button type="submit" class="btn btn-success">Create</button>
     </form>
+    <!-- End of Form -->
     
   </div>
 </template>

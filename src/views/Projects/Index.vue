@@ -23,7 +23,7 @@
     <div v-for="project in orderBy(filterBy(projects, filter, 'title'), sortAttribute, sortAscending)">
       <h3>Title: {{ project.title }}</h3>
       <h3>Location: {{ project.address }}</h3>
-      <h3>Dates: {{ project.start_date }} - {{ project.end_date }}</h3>
+      <h3>Dates: {{ newDate(project.start_date) }} - {{ newDate(project.end_date) }}</h3>
       <h3>Posted: {{ relativeDate(project.created_at) }} by
       <router-link v-bind:to="'/users/' + project.user.id">{{ project.user.first_name }} {{ project.user.last_name }}</router-link>
       </h3>
@@ -70,7 +70,10 @@ export default {
         this.sortAscending = 1;
       }
       this.sortAttribute = attribute;
-    }
+    },
+    newDate: function(date) {
+      return moment(date).format('MMMM Do YYYY');
+    },
   }
 };
 </script>
