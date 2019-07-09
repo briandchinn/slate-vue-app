@@ -5,7 +5,9 @@
     <h1>{{ message }}</h1>
 
     <div v-for="notification in notifications">
-      <h3>{{ notification.note }}</h3>
+      <h4>{{ notification.note }}</h4>
+      <router-link v-bind:to="'/projects/' + notification.project.id">Related Project: {{ notification.project.title }} </router-link>
+      <br>
       <button v-on:click="destroy(notification)">Destroy Notification</button>
       <hr>
     </div>
