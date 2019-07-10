@@ -9,7 +9,7 @@
       <router-link v-if="!isLoggedIn()" to="/signup">Sign Up | </router-link> 
       <router-link v-if="!isLoggedIn()" to="/login">Login |</router-link>
       <router-link v-if="isLoggedIn()" to="/logout">Logout</router-link>
-      <p v-if="isLoggedIn()">You are logged in as: {{ firstname}} {{ lastname }}</p>
+      <p v-if="isLoggedIn()">You are logged in as: {{ firstname}} {{ lastname }}<img v-bind:src="image" height="70" width="50"></p>
     </div>
     <router-view/>
 

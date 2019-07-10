@@ -1,7 +1,7 @@
 <template>
   <div class="projects-show">
     
-    {{ project }}
+    <!-- {{ project }} -->
 
     <!-- Project Details -->
     <div>
@@ -11,7 +11,8 @@
       <h3>Address: {{ project.address }}</h3>
       <h3>Start Date: {{ newDate(project.start_date) }}</h3>
       <h3>End Date: {{ newDate(project.end_date) }}</h3>
-      <h3>Number of Positions: {{ project.number_of_positions }}</h3>
+      <h3>Total Positions: {{ project.number_of_positions }}</h3>
+      <h3>Available Positions: {{ project.number_of_positions }}</h3>
       <h3>Posted: {{ relativeDate(project.created_at) }}</h3>
       <router-link v-bind:to="'/users/' + project.user.id">by {{ project.user.first_name }} {{ project.user.last_name }}</router-link>
       <br>
@@ -68,18 +69,13 @@
       <br>
 
       <div v-for="application in orderBy(filterBy(project.applications, filter, 'offered', 'created', 'favorite'), sortAttribute, sortAscending)">
-        <router-link v-bind:to="/users/ + application.user_id">{{ application.user.first_name }}</router-link>
-        <h5>Application ID: {{ application.id }} </h5>
-        <h5>Created: {{ application.created }} </h5>
+        <img v-bind:src="application.user.image" alt="user images" width="50"><br>
+        <h5>{{ application.user.first_name }} {{ application.user.last_name }}</h5>
+        <h5>Applied on: {{ newDate(application.created) }} </h5>
         <h5>Note: {{ application.note }} </h5>
         <h5>Offer Status: {{ application.offered }} </h5>
         <h5>Accepted Status: {{ application.accepted }} </h5>
         <h5>Favorite: {{ application.favorite }} </h5>
-        <h5>User ID: {{ application.user.id }} </h5>
-        <h5>First Name:{{ application.user.first_name }} </h5>
-        <h5>Last Name: {{ application.user.last_name }} </h5>
-        <h5>Email: {{ application.user.email }} </h5>
-        <img v-bind:src="application.user.image" alt="user images" width="50"><br>
 
         <div v-if="application.offered == !true">
           <button v-on:click="hire(application)">Hire Applicant</button>
@@ -87,13 +83,21 @@
         <div v-else>
           <h4>You offered {{application.user.first_name}} {{application.user.last_name}} the Job</h4>
         </div>
-
+        
+        <!-- Favorite Logic -->
         <div v-if="application.favorite">
-          <font-awesome-icon @click='unFavorite(application)' :icon="[`fas`,`star`]" size="lg" style="color:gold"/>
+          <font-awesome-icon v-on:click='favorite(application, true)' :icon="[`fas`,`star`]" size="lg" style="color:gold"/>
         </div>
         <div v-else>
-          <font-awesome-icon @click='unFavorite(application)' :icon="[`fas`,`star`]" size="lg" style="color:grey"/>
+          <font-awesome-icon v-on:click='favorite(application, false)' :icon="[`fas`,`star`]" size="lg" style="color:grey"/>
         </div>
+<!-- 
+        <div>
+          <button v-on:click='favorite(application)'><font-awesome-icon :icon="[`fas`,`star`]" size="lg" style="color:grey"/></button>
+          <button v-on:click='unFavorite(application)'><font-awesome-icon :icon="[`fas`,`star`]" size="lg" style="color:gold"/></button>
+        </div> -->
+    
+        <!-- End of Favorite Logic -->
 
         <hr>
       </div>
@@ -121,7 +125,7 @@ export default {
       sortAttribute: "",
       sortAscending: 1,
       filter:"",
-      myFavorite: false,
+      isFavorite: false,
     };
   },
   created: function() {
@@ -163,20 +167,13 @@ export default {
         console.log("Success", response.data);
       });
     },
-    favorite: function(application){
+    favorite: function(application, favoriteValue){
       var params = {
-        favorite: true
+        favorite: !favoriteValue
       };
       axios.patch("api/applications/" + application.id, params).then(response => {
         console.log("Success", response.data);
-      });
-    },
-    unFavorite: function(application){
-      var params = {
-        favorite: false
-      };
-      axios.patch("api/applications/" + application.id, params).then(response => {
-        console.log("Success", response.data);
+        application.favorite = !favoriteValue
       });
     },
     setSortAttribute: function(attribute){
@@ -186,7 +183,7 @@ export default {
         this.sortAscending = 1;
       }
       this.sortAttribute = attribute;
-    }
+    },
   }
 };
 </script>

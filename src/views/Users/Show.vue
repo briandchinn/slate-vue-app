@@ -1,15 +1,15 @@
 <template>
   <div class="users-show">
     
-    {{ user }}
+    <!-- {{ user }} -->
     <h1>{{ user.first_name }} {{ user.last_name }}</h1>
     <img v-bind:src="user.image">
     <h3>Current Position: {{ user.current_job_title }}</h3>
-    <h3><a href="https://www.w3schools.com/html/">IMDB URL</a></h3>
     <h3>Email: {{ user.email }}</h3>
     <h3>Address: {{ user.address }}</h3>
     <h3>Phone Number: {{ user.phone_number }}</h3>
-    <h3><a :href="user.resume" target="_blank">Click to Download Resume</a></h3>
+    <h3>IMDB:<a :href="user.imdb_url"> Click to Visit IMDB Page</a></h3>
+    <h3>Resume: <a :href="user.resume" target="_blank">Click to Download</a></h3>
     
     <template v-if="user.id == $parent.user_id">
       <button>
@@ -33,12 +33,11 @@
     <div v-for="project in user.projects">
       <br>
       <router-link v-bind:to="'/projects/' + project.id">{{ project.title }}</router-link>
-      <h5>{{ project.description }}</h5>
       <h5>{{ project.address }}</h5>
       <h5>{{ newDate(project.start_date) }} - {{ newDate(project.end_date) }}</h5>
       <hr>
     </div>
-    <hr>
+
     <!-- My Applications Section -->
     <h1 v-if="user.id == $parent.user_id">My Applications</h1>
 
@@ -137,6 +136,7 @@ export default {
       axios.patch("api/applications/"+ application.id, params).then(response => {
         this.newAcceptedNote = "";
         this.message = "You've accepted this job!";
+        console.log("Success", response.data);
       })
     },
     setSortAttribute: function(attribute){

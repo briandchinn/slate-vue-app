@@ -1,10 +1,10 @@
 <template>
   <div class="notifications-index">
-
-    {{ notifications }}
+    
     <h1>{{ message }}</h1>
 
     <div v-for="notification in notifications">
+      <h5>{{ newDate(notification.created) }}</h5>
       <h4>{{ notification.note }}</h4>
       <router-link v-bind:to="'/projects/' + notification.project.id">Related Project: {{ notification.project.title }} </router-link>
       <br>
@@ -18,12 +18,14 @@
 <script>
 
 import axios from "axios";
+import moment from "moment";
+
 
 export default {
   data: function() {
     return {
-      message: 'This is a users Notification Page',
-      notifications: []
+      message: 'Recent Notifications',
+      notifications: [],
     };
   },
   created: function() {
@@ -32,6 +34,9 @@ export default {
     });
   },
   methods: {
+    newDate: function(date) {
+      return moment(date).format('MMMM Do YYYY');
+    },
     destroy: function(notification) {
       axios
         .delete("/api/notifications/" + notification.id)
@@ -42,6 +47,6 @@ export default {
           this.notifications.splice(index, 1);
         });
       }
-  }
+    },
 };
 </script>
