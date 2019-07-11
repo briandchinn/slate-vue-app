@@ -1,7 +1,7 @@
 <template>
   <div class="projects-show">
     
-    <!-- {{ project }} -->
+    {{ project }}
 
     <!-- Project Details -->
     <div>
@@ -12,7 +12,7 @@
       <h3>Start Date: {{ newDate(project.start_date) }}</h3>
       <h3>End Date: {{ newDate(project.end_date) }}</h3>
       <h3>Total Positions: {{ project.number_of_positions }}</h3>
-      <h3>Available Positions: {{ project.number_of_positions }}</h3>
+      <h3>Available Positions: {{ project.remaining_positions }}</h3>
       <h3>Posted: {{ relativeDate(project.created_at) }}</h3>
       <router-link v-bind:to="'/users/' + project.user.id">by {{ project.user.first_name }} {{ project.user.last_name }}</router-link>
       <br>
@@ -75,7 +75,6 @@
         <h5>Note: {{ application.note }} </h5>
         <h5>Offer Status: {{ application.offered }} </h5>
         <h5>Accepted Status: {{ application.accepted }} </h5>
-        <h5>Favorite: {{ application.favorite }} </h5>
 
         <div v-if="application.offered == !true">
           <button v-on:click="hire(application)">Hire Applicant</button>
@@ -91,12 +90,6 @@
         <div v-else>
           <font-awesome-icon v-on:click='favorite(application, false)' :icon="[`fas`,`star`]" size="lg" style="color:grey"/>
         </div>
-<!-- 
-        <div>
-          <button v-on:click='favorite(application)'><font-awesome-icon :icon="[`fas`,`star`]" size="lg" style="color:grey"/></button>
-          <button v-on:click='unFavorite(application)'><font-awesome-icon :icon="[`fas`,`star`]" size="lg" style="color:gold"/></button>
-        </div> -->
-    
         <!-- End of Favorite Logic -->
 
         <hr>
