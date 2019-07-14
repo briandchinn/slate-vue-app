@@ -2,8 +2,8 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import axios from "axios";
-import { dom, library } from '@fortawesome/fontawesome-svg-core'
-import { faStar } from '@fortawesome/free-solid-svg-icons'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faStar, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import VuePikaday from '@enrian/vue-pikaday';
 
@@ -18,12 +18,13 @@ if (jwt) {
 }
 
 library.add( 
-  faStar
+  faStar,
+  faSignOutAlt
   )
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
-dom.watch()
+// dom.watch()
 
 Vue.config.productionTip = false
 

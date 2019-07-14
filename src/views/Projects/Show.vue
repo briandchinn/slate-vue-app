@@ -12,24 +12,29 @@
       <h3>Start Date: {{ newDate(project.start_date) }}</h3>
       <h3>End Date: {{ newDate(project.end_date) }}</h3>
       <h3>Total Positions: {{ project.number_of_positions }}</h3>
-      <h3>Available Positions: {{ project.remaining_positions }}</h3>
+      <h3 v-if="project.remaining_positions > 0">Available Positions: {{ project.remaining_positions }}</h3>
+      <h3 v-else>Sorry Project is Full</h3>
       <h3>Posted: {{ relativeDate(project.created_at) }}</h3>
       <router-link v-bind:to="'/users/' + project.user.id">by {{ project.user.first_name }} {{ project.user.last_name }}</router-link>
       <br>
       <br>
-
+      
+      <!-- Begin of Edit and Destroy -->
       <template v-if="project.user.id == $parent.user_id">
         <button>
           <router-link v-bind:to="'/projects/' + project.id + '/edit'">Edit Project</router-link>
         </button>
         <button v-on:click="destroy(project)">Destroy Project</button>
       </template>
+      <!-- End of Edit and Destroy -->
     </div>
     <!-- End of Project Details -->
     <hr>
     
+    <h1 v-if="project.start_date > today()">You are too late</h1>
+
     <!-- Application Section --> 
-    <template v-if="project.user.id != $parent.user_id">
+    <template v-if="project.user.id != $parent.user_id && project.remaining_positions > 0 && project.start_date < today()">
       <h1>Would You Like to Apply?</h1>
       <form v-on:submit.prevent="submit()">
         <div class="form-group">
@@ -41,6 +46,7 @@
       {{ message }}
       <hr>
     </template>
+    <h1 v-if="project.start_date < today()">This project is in the past. Applications no longer accepted.</h1>
     <!-- End of Application Section -->
 
     <!-- Applicants Section -->
@@ -91,7 +97,8 @@
           <font-awesome-icon v-on:click='favorite(application, false)' :icon="[`fas`,`star`]" size="lg" style="color:grey"/>
         </div>
         <!-- End of Favorite Logic -->
-
+        
+        
         <hr>
       </div>
     </template>
@@ -141,6 +148,9 @@ export default {
     },
     newDate: function(date) {
       return moment(date).format('MMMM Do YYYY');
+    },
+    today: function() {
+      return moment(new Date()).format('MMMM Do YYYY');
     },
     submit: function(){
       var params = {

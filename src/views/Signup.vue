@@ -1,6 +1,7 @@
 <template>
   <div class="signup">
-    <div class="container">
+
+    <!-- <div class="container">
       <form v-on:submit.prevent="submit()">
         <h1>Signup</h1>
         <ul>
@@ -60,17 +61,134 @@
           <option value="Production Assistant"></option>
         </datalist>
       </form>
+    </div> -->
+
+    <div class="body-wrap">
+      <section class="slice sct-color-2">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-6">
+              <div class="card form-card form-card--style-2 z-depth-3">
+                <div class="form-header text-center">
+                  <div class="form-header-icon">
+                    <i class="icon icon-3x ion-ios-personadd-outline"></i>
+                  </div>
+                </div>
+                <div class="form-body">
+                  <div class="text-center px-2">
+                    <h4 class="heading heading-4 strong-400 mb-0">Create a new account. No payment required.</h4>
+                  </div>
+                  <form class="form-default mt-4" data-toggle="validator" role="form" v-on:submit.prevent="submit()">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="control-label">First name</label>
+                          <input type="text" class="form-control form-control-lg" v-model="first_name">
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="control-label">Last name</label>
+                          <input type="text" class="form-control form-control-lg" v-model="last_name">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">Email</label>
+                            <input type="email" class="form-control form-control-lg" v-model="email">
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">Phone</label>
+                            <input type="text" class="form-control form-control-lg" v-model="phone_number">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="control-label">Address</label>
+                            <input type="text" class="form-control form-control-lg" v-model="address" placeholder="City, State Zip">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">IMDB</label>
+                            <input type="text" class="form-control form-control-lg" v-model="imdb_url">
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">Current Job Title</label>
+                            <input type="text" class="form-control form-control-lg" list="titles" v-model="current_job_title">
+                        </div>
+                      </div>
+
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">Resume</label>
+                            <input type="file" class="form-control form-control-lg" id="resume" v-on:change="setResumeFile($event)" ref="fileInput">
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">Image</label>
+                            <input type="file" class="form-control form-control-lg" id="image" v-on:change="setFile($event)" ref="fileInput">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="control-label">Password</label>
+                          <input type="password" class="form-control form-control-lg" v-model="password">
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group has-feedback">
+                          <label class="control-label">Confirm Password</label>
+                          <input type="password" class="form-control form-control-lg" v-model="password_confirmation">
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <datalist id="titles">
+                      <option value="1st Assistant Director"></option>
+                      <option value="2nd Assistant Director"></option>
+                      <option value="2nd 2nd Assistant Director"></option>
+                      <option value="Key Set Production Assistant"></option>
+                      <option value="Basecamp Production Assistant"></option>
+                      <option value="Production Assistant"></option>
+                    </datalist>
+
+                    <div class="mt-1 ">
+                      <small class="">By clicking "Sign up" you agree to our terms and conditions</small>
+                    </div>
+
+                    <button type="submit" class="btn btn-styled  btn-base-1 mt-4">
+                        Sign Up
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
-
-<!--     <datalist id="titles">
-      <option value="1st Assistant Director">
-      <option value="2nd Assistant Director">
-      <option value="2nd 2nd Assistant Director">
-      <option value="Key Set Production Assistant">
-      <option value="Basecamp Production Assistant">
-      <option value="Production Assistant">
-    </datalist> -->
-
+  
   </div>
 </template>
 
