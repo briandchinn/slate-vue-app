@@ -3,31 +3,35 @@
 
     <h1>Test Page</h1>
     
-    <!-- Favorite Start -->
-<!--     <div>
-      <div v-if="!myFavorite">
-      <font-awesome-icon @click='favorite()' :icon="[`fas`,`star`]" size="lg" style="color:grey"/>
-      </div>
-      <div v-else>
-      <font-awesome-icon @click='favorite()' :icon="[`fas`,`star`]" size="lg" style="color:gold"/>
-      </div>
-    </div> -->
-    <!-- Favorite End -->
 
-    <!-- Form Start -->
-<!--     <form v-on:submit.prevent="submit()">
-      <div class="form-row">
-        <div class="form-group">
-          <label for="start_date">Start Date</label>
-          <input type="text" class="form-control" id="start_date" placeholder="" v-model="newProjectStartDate">
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+      Launch demo modal
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Delete User</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Are you sure you want to delete your account? This cannont be undone so proceed with caution!
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Delete User</button>
+          </div>
         </div>
-        <div class="form-group">
-          <label for="end_date">End Date</label>
-          <input type="text" class="form-control" id="end_date" placeholder="" v-model="newProjectEndDate">
-        </div>      
       </div>
-    </form> -->
-    <!-- Form End -->
+    </div>
+
+
 
     <div class="text-center">
       <b-button variant="primary">

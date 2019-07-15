@@ -1,6 +1,6 @@
 <template>
   <div class="users-edit">
-    
+  
     <ul>
       <li v-for="error in errors">{{ error }}</li>
     </ul>
@@ -161,8 +161,15 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="text-left">
-                  <button class="btn btn-base-1" type="submit">Edit Profile
-                  </button>
+                  <button class="btn btn-base-1" type="submit">Edit Profile</button>
+                  
+
+                  <div class="btn btn-secondary ml-2">
+                    <router-link :to="`/users/${user.id}`">
+                      Cancel
+                    </router-link>
+                  </div>
+
                 </div>
               </div>
             </div>

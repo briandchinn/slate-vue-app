@@ -2,21 +2,21 @@
   <div class="users-show">
     
     <!-- {{ user }} -->
-    <h1>{{ user.first_name }} {{ user.last_name }}</h1>
+    <!-- <h1>{{ user.first_name }} {{ user.last_name }}</h1>
     <img v-bind:src="user.image">
-    <h3>Current Position: {{ user.current_job_title }}</h3>
-    <h3>Email: {{ user.email }}</h3>
+    <h3>Current Position: {{ user.current_job_title }}</h3> -->
+    <!-- <h3>Email: {{ user.email }}</h3>
     <h3>Address: {{ user.address }}</h3>
     <h3>Phone Number: {{ user.phone_number }}</h3>
     <h3>IMDB:<a :href="user.imdb_url"> Click to Visit IMDB Page</a></h3>
-    <h3>Resume: <a :href="user.resume" target="_blank">Click to Download</a></h3>
+    <h3>Resume: <a :href="user.resume" target="_blank">Click to Download</a></h3> -->
     
-    <template v-if="user.id == $parent.user_id">
+  <!--   <template v-if="user.id == $parent.user_id">
       <button>
         <router-link v-bind:to="'/users/' + user.id + '/edit'">Edit User</router-link>
       </button>
       <button v-on:click="destroy(user)">Destroy User</button>
-    </template>
+    </template> -->
 
     <br>
     <hr>
@@ -92,7 +92,7 @@
     </div>
     <!-- End of My Applications Section -->
 
-
+    <!-- Beginning of New Theme Section -->
     <section class="slice-sm sct-color-1">
       <div class="profile">
         <div class="container">
@@ -116,11 +116,32 @@
                   </div>
 
                   <!-- Profile connect -->
-                  <div class="profile-connect mt-4">
-                    <!-- <a href="#" class="btn btn-styled btn-block btn-rounded btn-base-1">Edit Profile</a> -->
-                    <router-link v-bind:to="'/users/' + user.id + '/edit'" class="btn btn-styled btn-block btn-rounded btn-base-1">Edit User</router-link>
-                    <a href="#" class="btn btn-styled btn-block btn-rounded btn-danger" v-on:click="destroy(user)">Delete Profile</a>
+                  <div class="profile-connect mt-4" v-if="user.id == $parent.user_id">
+                    <router-link v-bind:to="'/users/' + user.id + '/edit'" class="btn btn-styled btn-block btn-rounded btn-base-1 mb-3">Edit Profile</router-link>
+                    <a href="#" class="card-link text-danger"  v-on:click="destroy(user)">Delete Profile</a>
                   </div>
+
+                  <!-- Delete User Modal -->
+     <!--              <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="deleteModalLabel">Delete User</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          Are you sure you want to delete your account? This cannont be undone so proceed with caution!
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-primary">Delete User</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div> -->
+
 
                   <!-- Profile stats -->
                   <div class="profile-stats clearfix">
@@ -137,18 +158,23 @@
                     <!-- Profile connected accounts -->
                   <div class="profile-useful-links clearfix">
                     <div class="useful-links">
-                      <a href="#" class="link link--style-1">
-                        <i class="icon ion-social-instagram-outline"></i>
-                        instagram.com/webpixels_io
+                      <a :href="user.imdb_url" class="link link--style-1" target="_blank">
+                        <i class="fa fa-imdb"></i>
+                        imdb/{{user.first_name}}_{{user.last_name}}
                       </a>
-                      <a href="#" class="link link--style-1">
-                        <i class="icon ion-social-dribbble"></i>
-                        dribbble.com/webpixels
+                      <a :href="user.resume" class="link link--style-1">
+                        <i class="fa fa-file"></i>
+                        {{user.first_name}}_{{user.last_name}}'s Resume
                       </a>
 
                       <a href="#" class="link link--style-1">
-                        <i class="icon ion-earth"></i>
-                        webpixels.io
+                        <i class="fa fa-envelope"></i>
+                        {{user.email}}
+                      </a>
+
+                      <a href="" class="link link--style-1">
+                        <i class="fa fa-phone"></i>
+                        {{ user.phone_number }}
                       </a>
                     </div>
                   </div>
@@ -174,7 +200,7 @@
                   </div>
                 </div> -->
 
-            <!--     <div class="link-menu link-menu--style-3 py-4">
+  <!--               <div class="link-menu link-menu--style-3 py-4">
                   <a href="/pages/profile/account-settings.html">Settings</a>
                   <a href="/pages/profile/account-orders.html">Orders</a>
                   <a href="/pages/profile/account-cards.html">Cards</a>
@@ -184,32 +210,20 @@
 
                 <hr>
 
-                  <!-- Security steps -->
-                <div class="card no-border">
-                  <div class="card-body px-0">
-                    <ul class="list-group">
-                      <li class="list-group-item bg-transparent">
-                        <div class="row align-items-center">
-                          <div class="col-8">
-                            <h5 class="heading heading-6 strong-500">Security checkup</h5>
-                            <p class="text-md mb-0">
-                                Follow these steps in order to have a more secured account.
-                            </p>
-                          </div>
-
-                          <div class="col-4 text-right">
-                            <a href="#" class="btn btn-base-1 btn-outline">Create New Project</a>
-                          </div>
-                        </div>
-                      </li>
-                    </ul>
+                <!-- Begin Projects -->
+                <div class="row mt-3">
+                  <div class="col-md-12">
+                    <h3 v-if="user.id == $parent.user_id">My Projects</h3>
+                    <h3 v-else>{{ user.first_name }} {{ user.last_name }}'s Projects</h3>
+                    
+                      <router-link v-if="user.id == $parent.user_id" class="btn btn-primary" v-bind:to="'/projects/new'">Create New Project</router-link>
+                    
                   </div>
                 </div>
-                <hr>
 
-                <!-- Begin Projects -->
-                <h3 v-if="user.id == $parent.user_id">My Projects</h3>
-                <h3 v-else>{{ user.first_name }} {{ user.last_name }}'s Projects</h3>
+                <div>
+                  <h3 v-if="user.projects == false">No Existing Projects</h3>
+                </div>
 
                 <div class="card mt-3" v-for="project in user.projects">
                   <div class="card-body mt-3">
@@ -293,7 +307,7 @@ export default {
         .delete("/api/users/" + user.id)
         .then(response => {
           console.log("Success!", response.data);
-          this.$router.push("/");
+          this.$router.push("/signup");
         });
     },
     submit: function(application){

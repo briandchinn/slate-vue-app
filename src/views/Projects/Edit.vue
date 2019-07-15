@@ -54,7 +54,7 @@
 
     <!-- Beginning of New Template Form -->
     <div class="container">
-      <form class="form-default mt-4 mb-4" data-toggle="validator" role="form" v-on:submit.prevent="submit()">
+      <form class="form-default mt-4 mb-4 z-depth-1" data-toggle="validator" role="form" v-on:submit.prevent="submit()">
         <div class="card ">
           <div class="card-body">
             <div class="row">

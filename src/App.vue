@@ -53,14 +53,6 @@
               </li>
             </ul>
 
-            <ul class="navbar-nav ml-lg-auto">
-              <li class="nav-item">
-                <router-link v-if="isLoggedIn()" to="/notifications" class="nav-link">My Notifications</router-link>
-              </li>
-              <li class="nav-item">
-                <router-link v-if="isLoggedIn()" :to="`/users/${user_id}`" class="nav-link">My Profile</router-link>
-              </li>
-            </ul>
           </div>
           <div class="pl-4 d-none d-lg-inline-block">
             <router-link v-if="!isLoggedIn()" to="/signup" class="btn btn-styled  btn-base-1 text-uppercase btn-round">Sign Up</router-link>
@@ -68,10 +60,37 @@
           <div class="pl-4 d-none d-lg-inline-block">
             <router-link v-if="!isLoggedIn()" to="/login" class="btn btn-styled   btn-base-1 text-uppercase btn-round">Sign In</router-link>
           </div>
-          <div class="pl-4 d-none d-lg-inline-block">
-            <router-link v-if="isLoggedIn()" to="/logout" class="btn btn-styled btn-dark btn-base-1 text-uppercase btn-round btn-icon-left">
-            <i class="fas fa-sign-out-alt"></i>Log Out</router-link>
-          </div>         
+          
+          <!-- Begin User Nav Dropdown -->
+          <div class="dropdown dropdown--style-2" v-if="isLoggedIn()">
+              <a class="dropdown-toggle has-badge" href="#" data-toggle="dropdown" aria-expanded="false">
+                <img class="dropdown-image rounded-circle" :src="image">
+                <!-- <sup class="badge bg-blue">3</sup> -->
+                <span class="dropdown-text strong-600">{{firstname }} {{ lastname }}</span>
+              </a>
+              <div class="dropdown-menu">
+                <h6 class="dropdown-header">User menu</h6>
+                <router-link v-if="isLoggedIn()" to="/notifications">
+                  <a class="dropdown-item" href="">
+                    <!-- <span class="float-right badge badge-primary">4</span> -->
+                    <i class="ion-ios-email-outline icon-lg text-primary"></i>Notifications
+                  </a>
+                </router-link>
+                <router-link v-if="isLoggedIn()" :to="`/users/${user_id}`">
+                  <a class="dropdown-item" href="">
+                    <i class="ion-ios-gear-outline icon-lg text-primary"></i>Profile
+                  </a>
+                </router-link>
+                <div class="dropdown-divider" role="presentation"></div>
+                <router-link v-if="isLoggedIn()" to="/logout">
+                  <a class="dropdown-item" href="">
+                    <i class="ion-log-out icon-lg text-primary"></i>Log out
+                  </a>
+                </router-link>
+              </div>
+          </div> 
+          <!-- End User Nav Dropdown -->
+
         </div>
       </nav>
 
