@@ -1,14 +1,13 @@
 <template>
   <div class="projects-edit">
 
-    <h1>{{ message }}</h1>
     
     <ul>
       <li v-for="error in errors">{{ error }}</li>
     </ul>
     
     <!-- Beggining of Form -->
-    <form v-on:submit.prevent="submit()">
+    <!-- <form v-on:submit.prevent="submit()">
       <div class="form-row">
         <div class="form-group col-md-6">
           <label for="title">Title</label>
@@ -50,7 +49,95 @@
         <input type="number" class="form-control" id="number_of_positions" placeholder="" v-model="project.number_of_positions">
       </div>
       <button type="submit" class="btn btn-success">Update</button>
-    </form>
+    </form> -->
+    <!-- End of Form -->
+
+    <!-- Beginning of New Template Form -->
+    <div class="container">
+      <form class="form-default mt-4 mb-4" data-toggle="validator" role="form" v-on:submit.prevent="submit()">
+        <div class="card ">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-8">
+                <h1 class="heading heading-6 strong-600">Edit Project</h1>
+
+                <p class="c-gray-light mt-2">
+                    Any changes you make here can't be undone.  
+                </p>
+              </div>
+            </div>
+
+            <div class="row mt-3">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label class="control-label">Title</label>
+                  <div class="input-group input-group--style-1">
+                    <input type="text" class="form-control form-control-lg" id="title" v-model="project.title">
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="row mt-3">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label class="control-label">Description</label>
+                  <div class="input-group input-group--style-1">
+                    <input type="text" class="form-control form-control-lg" id="description" v-model="project.description">
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="row mt-3">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label class="control-label">Location</label>
+                  <div class="input-group input-group--style-1">
+                    <input type="text" class="form-control form-control-lg" id="address" v-model="project.address">
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="control-label">Start Date</label>
+                  <div class="input-group input-group--style-1">
+                    <input type="text" class="form-control form-control-lg" id="start_date" v-model="project.start_date">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="control-label">End Date</label>
+                  <div class="input-group input-group--style-1">
+                    <input type="text" class="form-control form-control-lg" id="end_date" v-model="project.end_date">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row mt-3">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label class="control-label">Number of Positions</label>
+                  <div class="input-group input-group--style-1">
+                    <input type="number" class="form-control form-control-lg"  id="number_of_positions" v-model="project.number_of_positions">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="text-left">
+              <button class="btn btn-base-1" type="submit">Create Project
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
     <!-- End of Form -->
 
   </div>
@@ -67,7 +154,6 @@ import moment from "moment";
 export default {
   data: function() {
     return {
-      message: 'This is the Edit Project Page',
       project: {},
       startDate:"",
       endDate:"",
