@@ -3,7 +3,7 @@
     
     <div class="container col-md-8">
       <div class="form-group mt-3">
-        <input type="text" class="form-control" placeholder="Search by title..." v-model="filter" list="titles">
+        <input type="text" class="form-control form-control-xl" placeholder="Search by title..." v-model="filter" list="titles">
       </div><br>
 
       <datalist id="titles">
@@ -13,8 +13,8 @@
       <div class="row">
         <div class="container col-md-12">
           <div class="form-group">
-            <h3>Search Projects</h3>
-            <button class="btn btn-styled btn-dark btn-xs" v-on:click="setSortAttribute('created_at')">Sort by Posted Date
+            <h3 class="d-inline-block align-middle">Search Projects</h3>
+            <button class="btn btn-styled btn-dark btn-xs pull-right" v-on:click="setSortAttribute('created_at')">Sort by Posted Date
               <span v-if="sortAttribute === 'created_at' && sortAscending === 1">^</span>
               <span v-if="sortAttribute === 'created_at' && sortAscending === -1">V</span>
             </button>
@@ -33,7 +33,7 @@
             <router-link v-bind:to="'/projects/' + project.id">{{ project.title }}</router-link>
           </h5>
           <ul class="inline-links inline-links--style-3 mb-1">
-              <li>
+              <li class="mr-2">
                   <i class="fa fa-street-view"></i>{{ project.address }}
               </li>
               <li>

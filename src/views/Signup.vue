@@ -64,7 +64,7 @@
     </div> -->
 
     <div class="body-wrap">
-      <section class="slice sct-color-2">
+      <section class="slice sct-color-2 bg-minimalist">
         <div class="container">
           <div class="row justify-content-center">
             <div class="col-lg-6">

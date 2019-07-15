@@ -13,7 +13,7 @@
     </div> -->
     
         <!-- Navbar -->
-      <nav class="navbar navbar-expand-lg navbar-inverse bg-gradient-1 navbar--link-arrow navbar sticky-top">
+      <nav class="navbar navbar-expand-lg navbar-inverse bg-gradient-1 navbar--link-arrow navbar sticky-top navbar--uppercase">
         <div class="container navbar-container">
           <!-- Brand/Logo -->
           <a class="navbar-brand" href="/index.html">
@@ -66,7 +66,7 @@
               <a class="dropdown-toggle has-badge" href="#" data-toggle="dropdown" aria-expanded="false">
                 <img class="dropdown-image rounded-circle" :src="image">
                 <!-- <sup class="badge bg-blue">3</sup> -->
-                <span class="dropdown-text strong-600">{{firstname }} {{ lastname }}</span>
+                <span class="dropdown-text text-white">{{firstname }} {{ lastname }}</span>
               </a>
               <div class="dropdown-menu">
                 <h6 class="dropdown-header">User menu</h6>
