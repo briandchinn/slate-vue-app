@@ -68,7 +68,7 @@
         <div class="container">
           <div class="row justify-content-center">
             <div class="col-lg-6">
-              <div class="card form-card form-card--style-2 z-depth-3">
+              <div class="card form-card form-card--style-2 z-depth-1">
                 <div class="form-header text-center">
                   <div class="form-header-icon">
                     <i class="icon icon-3x ion-ios-personadd-outline"></i>

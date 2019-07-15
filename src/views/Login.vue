@@ -23,7 +23,7 @@
       <div class="container">
         <div class="row justify-content-center cols-xs-space">
           <div class="col-lg-4">
-            <div class="form-card form-card--style-2 z-depth-5">
+            <div class="form-card form-card--style-2 z-depth-1">
               <div class="form-header text-center">
                 <div class="form-header-icon">
                   <i class="icon ion-log-in"></i>

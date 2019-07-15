@@ -55,7 +55,7 @@
 
             <ul class="navbar-nav ml-lg-auto">
               <li class="nav-item">
-                <router-link v-if="isLoggedIn()" to="/notifications" class="nav-link">My Notifications<b-badge variant="light">4</b-badge></router-link>
+                <router-link v-if="isLoggedIn()" to="/notifications" class="nav-link">My Notifications</router-link>
               </li>
               <li class="nav-item">
                 <router-link v-if="isLoggedIn()" :to="`/users/${user_id}`" class="nav-link">My Profile</router-link>

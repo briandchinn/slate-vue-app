@@ -92,6 +92,173 @@
     </div>
     <!-- End of My Applications Section -->
 
+
+    <section class="slice-sm sct-color-1">
+      <div class="profile">
+        <div class="container">
+          <div class="row cols-xs-space cols-sm-space cols-md-space">
+            <div class="col-lg-4">
+              <div class="sidebar sidebar--style-2 no-border stickyfill">
+                <div class="widget">
+                    <!-- Profile picture -->
+                  <div class="profile-picture profile-picture--style-2">
+                    <img v-bind:src="user.image" class="img-center">
+                    <a href="#" class="btn-aux">
+                        <i class="ion ion-edit"></i>
+                    </a>
+                  </div>
+
+                  <!-- Profile details -->
+                  <div class="profile-details">
+                    <h2 class="heading heading-4 strong-500 profile-name">{{ user.first_name }} {{ user.last_name }}</h2>
+                    <h3 class="heading heading-6 strong-400 profile-occupation mt-3">{{ user.current_job_title }}</h3>
+                    <h3 class="heading heading-light heading-6 strong-400 profile-location">{{ user.address }}</h3>
+                  </div>
+
+                  <!-- Profile connect -->
+                  <div class="profile-connect mt-4">
+                    <!-- <a href="#" class="btn btn-styled btn-block btn-rounded btn-base-1">Edit Profile</a> -->
+                    <router-link v-bind:to="'/users/' + user.id + '/edit'" class="btn btn-styled btn-block btn-rounded btn-base-1">Edit User</router-link>
+                    <a href="#" class="btn btn-styled btn-block btn-rounded btn-danger" v-on:click="destroy(user)">Delete Profile</a>
+                  </div>
+
+                  <!-- Profile stats -->
+                  <div class="profile-stats clearfix">
+                    <div class="stats-entry">
+                      <span class="stats-count">180</span>
+                      <span class="stats-label text-uppercase">Projects</span>
+                    </div>
+                    <div class="stats-entry">
+                      <span class="stats-count">1.3K</span>
+                      <span class="stats-label text-uppercase">Followers</span>
+                    </div>
+                  </div>
+
+                    <!-- Profile connected accounts -->
+                  <div class="profile-useful-links clearfix">
+                    <div class="useful-links">
+                      <a href="#" class="link link--style-1">
+                        <i class="icon ion-social-instagram-outline"></i>
+                        instagram.com/webpixels_io
+                      </a>
+                      <a href="#" class="link link--style-1">
+                        <i class="icon ion-social-dribbble"></i>
+                        dribbble.com/webpixels
+                      </a>
+
+                      <a href="#" class="link link--style-1">
+                        <i class="icon ion-earth"></i>
+                        webpixels.io
+                      </a>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-8">
+              <div class="main-content">
+                <!-- Page title -->
+                <!-- <div class="page-title">
+                  <div class="row align-items-center">
+                    <div class="col-lg-6 col-12">
+                      <h2 class="heading heading-5 text-capitalize strong-500 mb-0">
+                        <a href="#" class="link text-underline--none">
+                            <i class="ion-ios-arrow-back"></i> Security
+                        </a>
+                      </h2>
+                    </div>
+                      <div class="col-lg-6 col-12">
+                      </div>
+                  </div>
+                </div> -->
+
+            <!--     <div class="link-menu link-menu--style-3 py-4">
+                  <a href="/pages/profile/account-settings.html">Settings</a>
+                  <a href="/pages/profile/account-orders.html">Orders</a>
+                  <a href="/pages/profile/account-cards.html">Cards</a>
+                  <a href="/pages/profile/account-security.html" class="active">Security</a>
+                  <a href="/pages/profile/account-connections.html">Connections</a>
+                </div> -->
+
+                <hr>
+
+                  <!-- Security steps -->
+                <div class="card no-border">
+                  <div class="card-body px-0">
+                    <ul class="list-group">
+                      <li class="list-group-item bg-transparent">
+                        <div class="row align-items-center">
+                          <div class="col-8">
+                            <h5 class="heading heading-6 strong-500">Security checkup</h5>
+                            <p class="text-md mb-0">
+                                Follow these steps in order to have a more secured account.
+                            </p>
+                          </div>
+
+                          <div class="col-4 text-right">
+                            <a href="#" class="btn btn-base-1 btn-outline">Create New Project</a>
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <hr>
+
+                <!-- Begin Projects -->
+                <h3 v-if="user.id == $parent.user_id">My Projects</h3>
+                <h3 v-else>{{ user.first_name }} {{ user.last_name }}'s Projects</h3>
+
+                <div class="card mt-3" v-for="project in user.projects">
+                  <div class="card-body mt-3">
+                    <h5 class="heading heading-5 strong-600">{{ project.title }}</h5>
+                    <h6 class="heading heading-sm strong-400 text-muted mb-4">
+                        {{ project.address }}
+                    </h6>
+
+                    <p class="card-text">{{ newDate(project.start_date) }} - {{ newDate(project.end_date) }}</p>
+                    <router-link class="btn btn-primary" v-bind:to="'/projects/' + project.id">View Project</router-link>
+                  </div>
+                </div>
+                <!-- End Projects -->
+                
+                <!-- Begin Applications -->
+                <h3 v-if="user.id == $parent.user_id" class="mt-3">My Applications</h3>
+                <h3 v-else>{{ user.first_name }} {{ user.last_name }}'s Projects</h3>
+
+                <div class="card mt-3" v-for="application in user.applications">
+                  <div class="card-body mt-3">
+                    <h5 class="heading heading-5 strong-600">{{ application.project.title }}</h5>
+                    <h6 class="heading heading-sm strong-400 text-muted mb-4">
+                        {{ newDate(application.project.start_date) }} - {{ newDate(application.project.end_date) }}
+                    </h6>
+                    <h6 class="heading heading-sm strong-400 text-muted mb-4">
+                        {{ application.project.address }}
+                    </h6>
+                    <h6 class="heading heading-sm strong-400 text-muted mb-4">
+                        Offer Status: {{ application.offered }}
+                    </h6>
+                    <h6 class="heading heading-sm strong-400 text-muted mb-4">
+                        Accepted Status: {{ application.accepted }}
+                    </h6>
+                    <h6 class="heading heading-sm strong-400 text-muted mb-4">
+                        Created: {{ newDate(application.created) }}
+                    </h6>
+                    <p class="card-text">{{ application.project.description }}</p>
+                    <router-link class="btn btn-primary" v-bind:to="'/projects/' + application.project.id">View Project</router-link>
+                  </div>
+                </div>
+                <!-- End Applications -->
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </div>
 </template>
 
