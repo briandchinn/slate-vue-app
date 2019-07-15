@@ -29,6 +29,12 @@
     </form> -->
     <!-- Form End -->
 
+    <div class="text-center">
+      <b-button variant="primary">
+        Notifications <b-badge variant="light">4</b-badge>
+      </b-button>
+    </div>
+
     <template>
       <vue-pikaday 
         v-model="now"
@@ -50,6 +56,7 @@
 
 <script>
 import VuePikaday from '@enrian/vue-pikaday';
+import BootstrapVue from 'bootstrap-vue';
 
 export default {
   name: 'App',

@@ -13,69 +13,67 @@
     </div> -->
     
         <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-inverse bg-gradient-1 navbar--link-arrow navbar sticky-top">
-      <div class="container navbar-container">
-        <!-- Brand/Logo -->
-        <a class="navbar-brand" href="/index.html">
-          <img src="/assets/images/logo/logo-1-a.png" class="d-none d-lg-inline-block" alt="Boomerang">
-          <img src="/assets/images/logo/logo-1-a.png" class="d-lg-none" alt="Boomerang">            
-        </a>
-                
-        <div class="d-inline-block">
-          <!-- Navbar toggler  -->
-          <button class="navbar-toggler hamburger hamburger-js hamburger--spring" type="button" data-toggle="collapse" data-target="#navbar_main" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="hamburger-box">
-              <span class="hamburger-inner"></span>
-            </span>
-          </button>
-        </div>
-
-        <div class="collapse navbar-collapse align-items-center justify-content-end" id="navbar_main">
-          <!-- Navbar search - For small resolutions -->
-          <div class="navbar-search-widget b-xs-bottom py-3 d-lg-none d-none">
-            <form class="" role="form">
-              <div class="input-group input-group-lg">
-                <input type="text" class="form-control" placeholder="Search for...">
-                <span class="input-group-btn">
-                <button class="btn btn-base-3" type="button">Go!</button>
-                </span>
-              </div>
-            </form>
+      <nav class="navbar navbar-expand-lg navbar-inverse bg-gradient-1 navbar--link-arrow navbar sticky-top">
+        <div class="container navbar-container">
+          <!-- Brand/Logo -->
+          <a class="navbar-brand" href="/index.html">
+            <img src="/assets/images/logo/logo-1-a.png" class="d-none d-lg-inline-block" alt="Boomerang">
+            <img src="/assets/images/logo/logo-1-a.png" class="d-lg-none" alt="Boomerang">            
+          </a>
+                  
+          <div class="d-inline-block">
+            <!-- Navbar toggler  -->
+            <button class="navbar-toggler hamburger hamburger-js hamburger--spring" type="button" data-toggle="collapse" data-target="#navbar_main" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="hamburger-box">
+                <span class="hamburger-inner"></span>
+              </span>
+            </button>
           </div>
 
-          <!-- Navbar links -->
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <router-link v-if="isLoggedIn()" to="/projects" class="nav-link">Projects</router-link>
-            </li>
-            <li class="nav-item">
-              <router-link else to="/index" class="nav-link">Home</router-link>
-            </li>
-          </ul>
+          <div class="collapse navbar-collapse align-items-center justify-content-end" id="navbar_main">
+            <!-- Navbar search - For small resolutions -->
+            <div class="navbar-search-widget b-xs-bottom py-3 d-lg-none d-none">
+              <form class="" role="form">
+                <div class="input-group input-group-lg">
+                  <input type="text" class="form-control" placeholder="Search for...">
+                  <span class="input-group-btn">
+                  <button class="btn btn-base-3" type="button">Go!</button>
+                  </span>
+                </div>
+              </form>
+            </div>
 
-          <ul class="navbar-nav ml-lg-auto">
-            <li class="nav-item">
-              <router-link v-if="isLoggedIn()" to="/notifications" class="nav-link">My Notifications</router-link>
-            </li>
-            <li class="nav-item">
-              <router-link v-if="isLoggedIn()" :to="`/users/${user_id}`" class="nav-link">My Profile</router-link>
-            </li>
-          </ul>
-        </div>
-        <div class="pl-4 d-none d-lg-inline-block">
-          <router-link v-if="!isLoggedIn()" to="/signup" class="btn btn-styled  btn-base-1 text-uppercase btn-round">Sign Up</router-link>
-        </div>
-        <div class="pl-4 d-none d-lg-inline-block">
-          <router-link v-if="!isLoggedIn()" to="/login" class="btn btn-styled   btn-base-1 text-uppercase btn-round">Sign In</router-link>
-        </div>
-        <div class="pl-4 d-none d-lg-inline-block">
-          <router-link v-if="isLoggedIn()" to="/logout" class="btn btn-styled btn-dark btn-base-1 text-uppercase btn-round btn-icon-left">
-          <i class="fas fa-sign-out-alt"></i>Log Out</router-link>
-        </div>         
-      </div>
-    </nav>
+            <!-- Navbar links -->
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <router-link v-if="isLoggedIn()" to="/projects" class="nav-link">Projects</router-link>
+              </li>
+              <li class="nav-item">
+                <router-link v-if="!isLoggedIn()" to="/index" class="nav-link">Home</router-link>
+              </li>
+            </ul>
 
-
+            <ul class="navbar-nav ml-lg-auto">
+              <li class="nav-item">
+                <router-link v-if="isLoggedIn()" to="/notifications" class="nav-link">My Notifications<b-badge variant="light">4</b-badge></router-link>
+              </li>
+              <li class="nav-item">
+                <router-link v-if="isLoggedIn()" :to="`/users/${user_id}`" class="nav-link">My Profile</router-link>
+              </li>
+            </ul>
+          </div>
+          <div class="pl-4 d-none d-lg-inline-block">
+            <router-link v-if="!isLoggedIn()" to="/signup" class="btn btn-styled  btn-base-1 text-uppercase btn-round">Sign Up</router-link>
+          </div>
+          <div class="pl-4 d-none d-lg-inline-block">
+            <router-link v-if="!isLoggedIn()" to="/login" class="btn btn-styled   btn-base-1 text-uppercase btn-round">Sign In</router-link>
+          </div>
+          <div class="pl-4 d-none d-lg-inline-block">
+            <router-link v-if="isLoggedIn()" to="/logout" class="btn btn-styled btn-dark btn-base-1 text-uppercase btn-round btn-icon-left">
+            <i class="fas fa-sign-out-alt"></i>Log Out</router-link>
+          </div>         
+        </div>
+      </nav>
 
         <router-view/>
 
@@ -190,6 +188,7 @@
           </div>
         </div>
       </footer>
+
     </div>
 
 
@@ -199,6 +198,7 @@
 
 <script>
 import axios from "axios";
+
 
 export default {
   name: 'App',

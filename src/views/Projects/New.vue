@@ -1,9 +1,8 @@
 <template>
   <div class="projects-new">
-    <h1>{{ message }}</h1>
     
     <!-- Beggining of Form -->
-    <form v-on:submit.prevent="submit()">
+    <!-- <form v-on:submit.prevent="submit()">
       <div class="form-row">
         <div class="form-group col-md-6">
           <label for="title">Title</label>
@@ -43,8 +42,99 @@
         <input type="number" class="form-control" id="number_of_positions" placeholder="" v-model="newProjectPositions">
       </div>
       <button type="submit" class="btn btn-success">Create</button>
-    </form>
+    </form> -->
     <!-- End of Form -->
+    
+    <!-- Beginning of New Template Form -->
+    <div class="container">
+      <form class="form-default mt-4 mb-4" data-toggle="validator" role="form" v-on:submit.prevent="submit()">
+        <div class="card ">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-8">
+                <h1 class="heading heading-6 strong-600">Create New Project</h1>
+
+                <p class="c-gray-light mt-2">
+                    Upon submit the project will be placed on the main project page. Should you need to edit your project you can locate it on the main project page or from your profile page. 
+                </p>
+              </div>
+            </div>
+
+            <div class="row mt-3">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label class="control-label">Title</label>
+                  <div class="input-group input-group--style-1">
+                    <input type="text" class="form-control form-control-lg" v-model="newProjectTitle">
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="row mt-3">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label class="control-label">Description</label>
+                  <div class="input-group input-group--style-1">
+                    <input type="text" class="form-control form-control-lg" v-model="newProjectDescription">
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="row mt-3">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label class="control-label">Location</label>
+                  <div class="input-group input-group--style-1">
+                    <input type="text" class="form-control form-control-lg" v-model="newProjectAddress">
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="control-label">Start Date</label>
+                  <div class="input-group input-group--style-1">
+                    <input type="text" class="form-control form-control-lg">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="control-label">End Date</label>
+                  <div class="input-group input-group--style-1">
+                    <input type="text" class="form-control form-control-lg">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row mt-3">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label class="control-label">Number of Positions</label>
+                  <div class="input-group input-group--style-1">
+                    <input type="number" class="form-control form-control-lg"  v-model="newProjectPositions">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="text-left">
+              <!-- <a href="#" class="btn btn-base-1" type="submit">Create Project</a> -->
+              <button class="btn btn-base-1" type="submit">Create Project
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <!-- End of Form -->
+
+
 
   </div>
 </template>

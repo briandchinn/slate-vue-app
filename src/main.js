@@ -6,6 +6,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faStar, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import VuePikaday from '@enrian/vue-pikaday';
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 Vue.use(VuePikaday);
 
