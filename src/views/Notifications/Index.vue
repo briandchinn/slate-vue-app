@@ -49,7 +49,7 @@
                                   <i class="ion-trash-a" v-on:click="destroy(notification)"></i>
                               </a>
                           </td>
-                      </tr>  
+                      </tr>
                     </tbody>
                   </table>
                 </div>

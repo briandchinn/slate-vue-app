@@ -107,6 +107,16 @@
 
     <!-- Begin New Project Details -->
     <div class="container col-md-8 mb-3">
+      <div class="row mb-3">
+        <div class="col-md-12 ">
+          <h3 class="d-inline-block" v-if="project.user.id == $parent.user_id">My Project</h3>
+          <h5 class="d-inline-block" v-else>{{ project.user.first_name }} {{ project.user.last_name }}'s Projects</h5>
+            <div v-if="project.user.id == $parent.user_id" class="align-middle">
+              <button class="btn btn-danger btn-lg pull-right mr-2 align-middle" v-on:click="destroy(project)">Delete Project</button>
+              <router-link class="btn btn-secondary btn-lg pull-right mr-2 align-middle" v-bind:to="'/projects/' + project.id + '/edit'">Edit Project</router-link>
+            </div>
+        </div>
+      </div>
       <div class="card">
         <div class="card-header">
           <h3 class="heading heading-5">Project</h3>
@@ -114,7 +124,10 @@
         <div class="card-body">
           <h4 class="card-title">{{ project.title }}</h4>
           <p class="card-text">{{ project.description }}</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
+          <p class="card-text">{{ project.address }}</p>
+          <p class="card-text">{{ newDate(project.start_date) }} - {{ newDate(project.end_date) }}</p>
+          <p class="card-text">Total Positions: {{ project.number_of_positions }}</p>
+          <p class="card-text">Available Positions: {{ project.remaining_positions }}</p>
         </div>
         <div class="card-footer text-muted">
           <div class="row align-items-center">
@@ -142,19 +155,6 @@
     
     <!-- Begin Apply Section -->
     <div class="container col-md-8">
-      <!-- Simple Card Section -->
-      <div class="card no-border">
-        <div class="card-title no-border">
-            <h3 class="heading heading-6 strong-600">
-                My cards
-            </h3>
-            <p class="mt-1 mb-0">
-                Add you credit card for faster checkout process.
-            </p>
-        </div>
-      </div>
-      <!-- End Simple Card Section -->
-
       <!-- Begin Quick Apply Section -->
       <div class="card mt-4" v-if="project.user.id != $parent.user_id">
         <div class="card-body">
@@ -206,7 +206,7 @@
       </div>
 
       <div v-for="application in orderBy(filterBy(project.applications, filter, 'offered', 'created', 'favorite'), sortAttribute, sortAscending)">
-        <div class="card">
+        <div class="card mb-3">
           <div class="card-title">
             <div class="row align-items-center">
               <div class="col-8">
@@ -220,16 +220,25 @@
             </div>
           </div>
           <div class="card-body">
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            <p class="card-text">Applied On: {{ newDate(application.created) }}</p>
+            <p class="card-text">Note: {{ application.note }}</p>
+            <p class="card-text">Offer Status: {{ application.offered }}</p>
+            <p class="card-text">Accepted Status: {{ application.accepted }}</p>
           </div>
           <div class="card-footer">
             <div class="row align-items-center">
-              <div class="col-6">
+              <!-- <div class="col-6">
                 <a href="#" class="btn btn-base-1">Hire Applicant</a>
+              </div> -->
+              <div v-if="application.offered == !true" class="col-6">
+                <button class="btn btn-base-1" v-on:click="hire(application)">Hire Applicant</button>
               </div>
-              <div class="col-6 text-right">
-                <h6 class="heading heading-sm strong-400 text-muted mb-0">{{ newDate(application.created) }}</h6>
+              <div v-else>
+                <p>You offered {{application.user.first_name}} {{application.user.last_name}} the Job</p>
               </div>
+             <!--  <div class="col-6 text-right">
+                <h6 class="heading heading-sm strong-400 text-muted mb-0">Applied On: {{ newDate(application.created) }}</h6>
+              </div> -->
             </div>
           </div>
         </div>
