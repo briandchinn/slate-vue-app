@@ -263,8 +263,11 @@
                         </div>
                         <button type="submit" class="btn btn-success">Accept</button>
                       </form>
+
+
                       <!-- End Acceptance Form -->
-                      <li class="list-group-item">Accepted Status: {{ application.accepted }}</li>
+                      <li class="list-group-item" v-if="!application.accepted">Accepted Status: <span class="text-warning">Pending</span></li>
+                      <li v-else class="list-group-item text-success">You accepted this offer!</li>
                     </ul>
                     <router-link class="btn btn-styled btn-base-1 btn-outline btn-sm mt-3" v-bind:to="'/projects/' + application.project.id">View Project</router-link>
                   </div>

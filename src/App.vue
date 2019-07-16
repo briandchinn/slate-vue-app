@@ -49,6 +49,9 @@
                 <router-link v-if="isLoggedIn()" to="/projects" class="nav-link">Projects</router-link>
               </li>
               <li class="nav-item">
+                <router-link v-if="isLoggedIn()" to="/projects/new" class="nav-link">New Project</router-link>
+              </li>
+              <li class="nav-item">
                 <router-link v-if="!isLoggedIn()" to="/index" class="nav-link">Home</router-link>
               </li>
             </ul>

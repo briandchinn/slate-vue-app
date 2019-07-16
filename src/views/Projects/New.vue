@@ -96,18 +96,26 @@
             <div class="row">
               <div class="col-md-6">
                 <div class="form-group">
-                  <label class="control-label">Start Date</label>
-                  <div class="input-group input-group--style-1">
-                    <input type="text" class="form-control form-control-lg">
-                  </div>
+                  <label for="start_date" class="control-label">Start Date</label>
+                  <template>
+                    <vue-pikaday class="input-group input-group--style-1" 
+                      v-model="newProjectStartDate"
+                      placeholder=""
+                      :options="pickadayOptions"
+                    />
+                  </template>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
-                  <label class="control-label">End Date</label>
-                  <div class="input-group input-group--style-1">
-                    <input type="text" class="form-control form-control-lg">
-                  </div>
+                  <label for="end_date" class="control-label">End Date</label>
+                  <template>
+                    <vue-pikaday class="input-group input-group--style-1" 
+                      v-model="newProjectEndDate"
+                      placeholder=""
+                      :options="pickadayOptions"
+                    />
+                  </template>
                 </div>
               </div>
             </div>
@@ -161,6 +169,7 @@ export default {
       newProjectPositions: "",
       pickadayOptions: {
         format: 'MM/DD/YYYY',
+        minDate: new Date(),
         },
     };
   },
