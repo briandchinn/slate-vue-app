@@ -194,7 +194,17 @@
 
     <!-- Begin Applicants Details -->
     <div class="container col-md-8 mb-3 mt-3" v-if="project.user.id == $parent.user_id">
-      <h4 class="d-inline-block align-middle">My Applicants</h4>
+  
+      <div class="row mt-5">
+        <div class="col-md-12 ">
+          <h3 class="d-inline-block align-middle" v-if="project.user.id == $parent.user_id">My Applicants</h3>
+          <h5 class="d-inline-block align-middle" v-else>'s Projects</h5>
+            <router-link v-if="project.user.id == $parent.user_id" class="btn btn-success btn-lg pull-right ml-2" v-bind:to="'/projects/new'">Sort by Offer Status</router-link>
+            <router-link v-if="project.user.id == $parent.user_id" class="btn btn-success btn-lg pull-right ml-2" v-bind:to="'/projects/new'">Sort by Date</router-link>
+            <router-link v-if="project.user.id == $parent.user_id" class="btn btn-success btn-lg pull-right" v-bind:to="'/projects/new'">Sort by Favorite</router-link>
+        </div>
+      </div>
+
       <div v-for="application in orderBy(filterBy(project.applications, filter, 'offered', 'created', 'favorite'), sortAttribute, sortAscending)">
         <div class="card">
           <div class="card-title">
@@ -204,7 +214,7 @@
               </div>
               <div class="col-4">
                 <div class="card-icon-actions text-right">
-                  <a href="#" class="favorite active" data-toggle="tooltip" data-original-title="Save to favorites"><i class="fa fa-star"></i></a>
+                  <a href="#" class="favorite active" data-toggle="tooltip" data-original-title="Save to favorites"><i class="fa fa-star fa-2x"></i></a>
                 </div>
               </div>
             </div>

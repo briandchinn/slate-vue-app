@@ -98,7 +98,7 @@
         <div class="container">
           <div class="row cols-xs-space cols-sm-space cols-md-space">
             <div class="col-lg-4">
-              <div class="sidebar sidebar--style-2 no-border stickyfill">
+              <div class="sidebar sidebar--style-2 no-border stickyfill bg-white">
                 <div class="widget">
                     <!-- Profile picture -->
                   <div class="profile-picture profile-picture--style-2">
@@ -181,7 +181,27 @@
 
                 </div>
               </div>
+
+              <div class="block--style-4 block--style-4-v2 mt-4">
+                  <div class="block-body bg-base-1">
+                      <p>
+                          <span class="quote"><i class="fa fa-quote-left"></i></span>
+                          Rachel is a pleasure to work with. Her experience on set is second to none and is the person you want to go to battle with!
+                      </p>
+                  </div>
+                  <div class="info-author">
+                      <div class="author-img">
+                        <img src="https://preview.webpixels.io/boomerang-v3.6.1/assets/images/prv/people/person-1-75x75.png" class="rounded-circle">
+                      </div>
+                      <div class="author-info">
+                          <span class="author-name strong-600">David Wally</span>
+                          <span class="author-pos">Key Set PA</span>
+                      </div>
+                  </div>
+              </div>
             </div>
+
+
 
             <div class="col-lg-8">
               <div class="main-content">

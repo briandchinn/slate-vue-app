@@ -13,7 +13,7 @@
     </div> -->
     
         <!-- Navbar -->
-      <nav class="navbar navbar-expand-lg navbar-inverse bg-gradient-1 navbar--link-arrow navbar sticky-top navbar--uppercase">
+      <nav class="navbar navbar-expand-lg navbar-inverse bg-base-2 navbar--link-arrow navbar sticky-top navbar--uppercase">
         <div class="container navbar-container">
           <!-- Brand/Logo -->
           <a class="navbar-brand" href="/index.html">
