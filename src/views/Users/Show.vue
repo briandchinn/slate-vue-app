@@ -18,7 +18,7 @@
       <button v-on:click="destroy(user)">Destroy User</button>
     </template> -->
 
-    <br>
+<!--     <br>
     <hr>
 
     <h1>{{ user.first_name }} {{ user.last_name }}'s Projects</h1>
@@ -36,10 +36,10 @@
       <h5>{{ project.address }}</h5>
       <h5>{{ newDate(project.start_date) }} - {{ newDate(project.end_date) }}</h5>
       <hr>
-    </div>
+    </div> -->
 
     <!-- My Applications Section -->
-    <h1 v-if="user.id == $parent.user_id">My Applications</h1>
+    <!-- <h1 v-if="user.id == $parent.user_id">My Applications</h1>
 
     <div>
       <h3 v-if="user.applications == false">No Existing Applications</h3>
@@ -89,11 +89,11 @@
       </form>
 
       <hr>
-    </div>
+    </div> -->
     <!-- End of My Applications Section -->
 
     <!-- Beginning of New Theme Section -->
-    <section class="slice-sm sct-color-1">
+    <section class="slice-sm sct-color-1 bg-minimalist">
       <div class="profile">
         <div class="container">
           <div class="row cols-xs-space cols-sm-space cols-md-space">
@@ -117,7 +117,7 @@
 
                   <!-- Profile connect -->
                   <div class="profile-connect mt-4" v-if="user.id == $parent.user_id">
-                    <router-link v-bind:to="'/users/' + user.id + '/edit'" class="btn btn-styled btn-block btn-rounded btn-base-1 mb-3">Edit Profile</router-link>
+                    <router-link v-bind:to="'/users/' + user.id + '/edit'" class="btn btn-styled btn-block btn-rounded btn-base-3 mb-3">Edit Profile</router-link>
                     <a href="#" class="card-link text-danger"  v-on:click="destroy(user)">Delete Profile</a>
                   </div>
 
@@ -144,7 +144,7 @@
 
 
                   <!-- Profile stats -->
-                  <div class="profile-stats clearfix">
+                  <div class="profile-stats clearfix mt-3">
                     <div class="stats-entry">
                       <span class="stats-count">180</span>
                       <span class="stats-label text-uppercase">Projects</span>
@@ -164,7 +164,7 @@
                       </a>
                       <a :href="user.resume" class="link link--style-1">
                         <i class="fa fa-file"></i>
-                        {{user.first_name}}_{{user.last_name}}'s Resume
+                        {{user.first_name}} {{user.last_name}}'s Resume
                       </a>
 
                       <a href="#" class="link link--style-1">
@@ -208,15 +208,15 @@
                   <a href="/pages/profile/account-connections.html">Connections</a>
                 </div> -->
 
-                <hr>
-
+<!--                 <hr>
+ -->
                 <!-- Begin Projects -->
                 <div class="row mt-3">
-                  <div class="col-md-12">
-                    <h3 v-if="user.id == $parent.user_id">My Projects</h3>
-                    <h3 v-else>{{ user.first_name }} {{ user.last_name }}'s Projects</h3>
+                  <div class="col-md-12 ">
+                    <h3 class="d-inline-block align-middle" v-if="user.id == $parent.user_id">My Projects</h3>
+                    <h5 class="d-inline-block align-middle" v-else>{{ user.first_name }} {{ user.last_name }}'s Projects</h5>
                     
-                      <router-link v-if="user.id == $parent.user_id" class="btn btn-primary" v-bind:to="'/projects/new'">Create New Project</router-link>
+                      <router-link v-if="user.id == $parent.user_id" class="btn btn-success btn-lg pull-right" v-bind:to="'/projects/new'">Create New Project</router-link>
                     
                   </div>
                 </div>
@@ -225,24 +225,24 @@
                   <h3 v-if="user.projects == false">No Existing Projects</h3>
                 </div>
 
-                <div class="card mt-3" v-for="project in user.projects">
+                <div class="card mt-3 z-depth-1--hover" v-for="project in user.projects">
                   <div class="card-body mt-3">
+                    <span class="block-ribbon block-ribbon-right badge badge-pill bg-green text-uppercase">Project Open</span>
                     <h5 class="heading heading-5 strong-600">{{ project.title }}</h5>
                     <h6 class="heading heading-sm strong-400 text-muted mb-4">
                         {{ project.address }}
                     </h6>
 
                     <p class="card-text">{{ newDate(project.start_date) }} - {{ newDate(project.end_date) }}</p>
-                    <router-link class="btn btn-primary" v-bind:to="'/projects/' + project.id">View Project</router-link>
+                    <router-link class="btn btn-styled btn-base-1 btn-outline btn-sm" v-bind:to="'/projects/' + project.id">View Project</router-link>
                   </div>
                 </div>
                 <!-- End Projects -->
                 
                 <!-- Begin Applications -->
                 <h3 v-if="user.id == $parent.user_id" class="mt-3">My Applications</h3>
-                <h3 v-else>{{ user.first_name }} {{ user.last_name }}'s Projects</h3>
 
-                <div class="card mt-3" v-for="application in user.applications">
+                <div class="card mt-3 z-depth-1--hover" v-for="application in user.applications">
                   <div class="card-body mt-3">
                     <h5 class="heading heading-5 strong-600">{{ application.project.title }}</h5>
                     <h6 class="heading heading-sm strong-400 text-muted mb-4">
@@ -261,7 +261,7 @@
                         Created: {{ newDate(application.created) }}
                     </h6>
                     <p class="card-text">{{ application.project.description }}</p>
-                    <router-link class="btn btn-primary" v-bind:to="'/projects/' + application.project.id">View Project</router-link>
+                    <router-link class="btn btn-styled btn-base-1 btn-outline btn-sm" v-bind:to="'/projects/' + application.project.id">View Project</router-link>
                   </div>
                 </div>
                 <!-- End Applications -->

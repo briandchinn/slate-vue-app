@@ -13,7 +13,7 @@
       <div class="row">
         <div class="container col-md-12">
           <div class="form-group">
-            <h3 class="d-inline-block align-middle">Search Projects</h3>
+            <h3 class="d-inline-block align-middle">Search Projects<small> (11)</small> </h3>
             <button class="btn btn-styled btn-dark btn-xs pull-right" v-on:click="setSortAttribute('created_at')">Sort by Posted Date
               <span v-if="sortAttribute === 'created_at' && sortAscending === 1">^</span>
               <span v-if="sortAttribute === 'created_at' && sortAscending === -1">V</span>
@@ -26,9 +26,9 @@
 
     <!-- Begin Projects -->
     <div class="container col-md-8">
-      <div class="card mb-3 z-depth-2" v-for="project in orderBy(filterBy(projects, filter, 'title'), sortAttribute, sortAscending)">
+      <div class="card mb-3 z-depth-1--hover" v-for="project in orderBy(filterBy(projects, filter, 'title'), sortAttribute, sortAscending)">
         <div class="card-body">
-          <span class="block-ribbon block-ribbon-right badge badge-pill bg-green text-uppercase">Open</span>
+          <span class="block-ribbon block-ribbon-right badge badge-pill bg-green text-uppercase">Project Open</span>
           <h5 class="heading heading-5 strong-600">
             <router-link v-bind:to="'/projects/' + project.id">{{ project.title }}</router-link>
           </h5>
