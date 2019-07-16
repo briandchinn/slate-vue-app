@@ -3,7 +3,7 @@ import App from './App.vue'
 import router from './router'
 import axios from "axios";
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faStar, faSignOutAlt, faPhone } from '@fortawesome/free-solid-svg-icons'
+import { faStar, faSignOutAlt, faPhone, faLevelUpAlt } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import VuePikaday from '@enrian/vue-pikaday';
 import 'bootstrap-vue/dist/bootstrap-vue.css'
@@ -21,7 +21,8 @@ if (jwt) {
 library.add( 
   faStar,
   faSignOutAlt,
-  faPhone
+  faPhone,
+  faLevelUpAlt
   )
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)

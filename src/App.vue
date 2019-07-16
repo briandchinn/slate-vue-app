@@ -17,7 +17,7 @@
         <div class="container navbar-container">
           <!-- Brand/Logo -->
           <a class="navbar-brand" href="/index.html">
-            <img src="/assets/images/logo/logo-1-a.png" class="d-none d-lg-inline-block" alt="Boomerang">
+            <img src="/assets/images/logo/slate_logo.png" class="d-none d-lg-inline-block" alt="Boomerang">
             <img src="/assets/images/logo/logo-1-a.png" class="d-lg-none" alt="Boomerang">            
           </a>
                   
@@ -103,7 +103,7 @@
             <div class="row cols-xs-space cols-sm-space cols-md-space">
               <div class="col-lg-5">
                 <div class="col">
-                  <img src="/assets/images/logo/logo-1-c.png">
+                  <img src="/assets/images/logo/slate_logo.png">
                   <span class="clearfix"></span>
                   <span class="heading heading-sm c-gray-light strong-400">One template. Infinite solutions.</span>
                   <p class="mt-3">

@@ -186,7 +186,7 @@
                   <div class="block-body bg-base-1">
                       <p>
                           <span class="quote"><i class="fa fa-quote-left"></i></span>
-                          Rachel is a pleasure to work with. Her experience on set is second to none and is the person you want to go to battle with!
+                          {{user.first_name}} is a pleasure to work with. Experience on set is second to none and is the person you want to go to battle with!
                       </p>
                   </div>
                   <div class="info-author">
@@ -231,7 +231,7 @@
 <!--                 <hr>
  -->
                 <!-- Begin Projects -->
-                <div class="row mt-3">
+                <div class="row mb-3">
                   <div class="col-md-12 ">
                     <h3 class="d-inline-block align-middle" v-if="user.id == $parent.user_id">My Projects</h3>
                     <h5 class="d-inline-block align-middle" v-else>{{ user.first_name }} {{ user.last_name }}'s Projects</h5>
@@ -240,9 +240,11 @@
                     
                   </div>
                 </div>
-
-                <div>
-                  <h3 v-if="user.projects == false">No Existing Projects</h3>
+                
+                <div class="card mb-5" v-if="user.projects == false">
+                  <div class="card-body text-center">
+                    <p class="mb-0">No Existing Projects. Create Your first project by clicking create new project above!<i class="fa fa-level-up-alt"></i></p>
+                  </div>
                 </div>
 
                 <div class="card mt-3 z-depth-1--hover" v-for="project in user.projects">
@@ -282,6 +284,13 @@
                     </h6>
                     <p class="card-text">{{ application.project.description }}</p>
                     <router-link class="btn btn-styled btn-base-1 btn-outline btn-sm" v-bind:to="'/projects/' + application.project.id">View Project</router-link>
+                  </div>
+                </div>
+
+                <div class="card mb-5" v-if="user.applications == false">
+                  <div class="card-body text-center">
+                    <p class="mb-0">No Existing Applications.</p>
+                    <router-link v-bind:to="'/projects'" class="btn btn-primary mt-2">Search Open Projects</router-link>
                   </div>
                 </div>
                 <!-- End Applications -->
