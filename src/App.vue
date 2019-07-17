@@ -16,7 +16,7 @@
       <nav class="navbar navbar-expand-lg navbar-inverse bg-base-2 navbar--link-arrow navbar sticky-top navbar--uppercase">
         <div class="container navbar-container">
           <!-- Brand/Logo -->
-          <a class="navbar-brand" href="/index.html">
+          <a class="navbar-brand" href="/">
             <img src="/assets/images/logo/slate_logo.png" class="d-none d-lg-inline-block" alt="Boomerang">
             <img src="/assets/images/logo/logo-1-a.png" class="d-lg-none" alt="Boomerang">            
           </a>
@@ -52,16 +52,16 @@
                 <router-link v-if="isLoggedIn()" to="/projects/new" class="nav-link">New Project</router-link>
               </li>
               <li class="nav-item">
-                <router-link v-if="!isLoggedIn()" to="/index" class="nav-link">Home</router-link>
+                <router-link v-if="!isLoggedIn()" to="/index" class="nav-link"></router-link>
               </li>
             </ul>
 
           </div>
           <div class="pl-4 d-none d-lg-inline-block">
-            <router-link v-if="!isLoggedIn()" to="/signup" class="btn btn-styled  btn-base-1 text-uppercase btn-round">Sign Up</router-link>
+            <router-link v-if="!isLoggedIn()" to="/signup" class="btn btn-styled  btn-base-1 btn-outline text-uppercase btn-round">Sign Up</router-link>
           </div>
-          <div class="pl-4 d-none d-lg-inline-block">
-            <router-link v-if="!isLoggedIn()" to="/login" class="btn btn-styled   btn-base-1 text-uppercase btn-round">Sign In</router-link>
+          <div class="pl-2 d-none d-lg-inline-block">
+            <router-link v-if="!isLoggedIn()" to="/login" class="btn btn-styled   btn-base-1 btn-outline text-uppercase btn-round">Sign In</router-link>
           </div>
           
           <!-- Begin User Nav Dropdown -->
@@ -108,15 +108,15 @@
                 <div class="col">
                   <img src="/assets/images/logo/slate_logo.png">
                   <span class="clearfix"></span>
-                  <span class="heading heading-sm c-gray-light strong-400">One template. Infinite solutions.</span>
+                  <span class="heading heading-sm c-gray-light strong-400">Hiring Shouldn't be this Simple</span>
                   <p class="mt-3">
                     All the components included in Boomerang are built to the same level of quality as Bootstrap and highlighted with several example pages.
                   </p>
 
                   <div class="copyright mt-4">
                     <p>
-                      Copyright &copy; 2018                                <a href="https://webpixels.io" target="_blank">
-                        <strong>Webpixels</strong>
+                      Copyright &copy; 2019                                
+                        <strong>Slate</strong>
                       </a> -
                       All rights reserved
                     </p>

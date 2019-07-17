@@ -1,7 +1,7 @@
 <template>
   <div class="projects-index">
     
-    <div class="container col-md-8">
+    <div class="container col-md-8" style="max-width:1000px">
       <div class="form-group mt-3">
         <input type="text" class="form-control form-control-xl" placeholder="Search by title..." v-model="filter" list="titles">
       </div><br>
@@ -25,7 +25,7 @@
     </div>
 
     <!-- Begin Projects -->
-    <div class="container col-md-8">
+    <div class="container col-md-8" style="max-width:1000px">
       <div class="card mb-3 z-depth-1--hover" v-for="project in orderBy(filterBy(projects, filter, 'title'), sortAttribute, sortAscending)">
         <div class="card-body">
           <span class="block-ribbon block-ribbon-right badge badge-pill bg-green text-uppercase">Project Open</span>

@@ -46,7 +46,7 @@
     <!-- End of Form -->
     
     <!-- Beginning of New Template Form -->
-    <div class="container col-md-8">
+    <div class="container col-md-8" style="max-width:800px">
       <form class="form-default mt-4 mb-4" data-toggle="validator" role="form" v-on:submit.prevent="submit()">
         <div class="card z-depth-1">
           <div class="card-body">
@@ -130,11 +130,16 @@
                 </div>
               </div>
             </div>
-
-            <div class="text-left">
-              <!-- <a href="#" class="btn btn-base-1" type="submit">Create Project</a> -->
-              <button class="btn btn-base-1" type="submit">Create Project
-              </button>
+            
+            <div class="row">
+              <div class="col-md-12">
+                <div class="text-left">
+                  <button class="btn btn-base-1" type="submit">Create Project</button>
+                    <router-link class="btn btn-link ml-2" :to="`/projects`">
+                      Cancel
+                    </router-link>
+                </div>
+              </div>
             </div>
           </div>
         </div>

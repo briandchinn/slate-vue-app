@@ -57,7 +57,7 @@
     </form> -->
     <!-- End of Edit Form -->
     
-    <div class="container">
+    <div class="container" style="max-width:800px">
       <form class="form-default mt-4 mb-4" data-toggle="validator" role="form" v-on:submit.prevent="submit()">
         <div class="card z-depth-1">
           <div class="card-body">
@@ -162,14 +162,9 @@
               <div class="col-md-12">
                 <div class="text-left">
                   <button class="btn btn-base-1" type="submit">Edit Profile</button>
-                  
-
-                  <div class="btn btn-secondary ml-2">
-                    <router-link :to="`/users/${user.id}`">
+                    <router-link class="btn btn-link ml-2" :to="`/users/${user.id}`">
                       Cancel
                     </router-link>
-                  </div>
-
                 </div>
               </div>
             </div>

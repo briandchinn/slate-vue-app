@@ -12,6 +12,7 @@ import Signup from './views/Signup.vue'
 import Login from './views/Login.vue'
 import Logout from './views/Logout.vue'
 import Test from './views/Test.vue'
+import Home from './views/Home.vue'
 
 Vue.use(Router)
 
@@ -79,5 +80,10 @@ export default new Router({
       name: 'test',
       component: Test
     },
+    {
+      path: '/',
+      name: 'home',
+      component: Home
+    }
   ]
 })
