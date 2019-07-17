@@ -90,7 +90,7 @@
         </div> -->
         
         <!-- Favorite Logic -->
-        <!-- <div v-if="application.favorite">
+    <!--     <div v-if="application.favorite">
           <font-awesome-icon v-on:click='favorite(application, true)' :icon="[`fas`,`star`]" size="lg" style="color:gold"/>
         </div>
         <div v-else>
@@ -243,7 +243,14 @@
               </div>
               <div class="col-4">
                 <div class="card-icon-actions text-right">
-                  <a href="#" class="favorite active" data-toggle="tooltip" data-original-title="Save to favorites"><i class="fa fa-star fa-2x"></i></a>
+                  <!-- Favorite Logic -->
+                  <div v-if="application.favorite">
+                    <font-awesome-icon v-on:click='favorite(application, true)' :icon="[`fas`,`star`]" size="lg" style="color:gold"/>
+                  </div>
+                  <div v-else>
+                    <font-awesome-icon v-on:click='favorite(application, false)' :icon="[`fas`,`star`]" size="lg" style="color:grey"/>
+                  </div>
+                  <!-- End of Favorite Logic -->
                 </div>
               </div>
             </div>

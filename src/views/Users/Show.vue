@@ -194,7 +194,7 @@
                     <h3 class="d-inline-block align-middle" v-else>{{ user.first_name }} {{ user.last_name }}'s Projects</h3>
                       
                       <!-- Begin Link Currrent Project Owner Has Projects -->
-                      <router-link v-if="user.id == $parent.user_id && user.projects.length > 0" class="btn btn-success btn-lg pull-right" v-bind:to="'/projects/new'">Create New Project</router-link>
+                      <router-link v-if="user.id == $parent.user_id && user.projects.length > 0" class="btn btn-base-1 btn-lg pull-right" v-bind:to="'/projects/new'">Create New Project</router-link>
                     
                   </div>
                 </div>
@@ -203,7 +203,7 @@
                 <div class="card mb-5" v-if="user.id == $parent.user_id && user.projects.length < 1">
                   <div class="card-body text-center">
                     <p class="mb-0">You haven't created any projects yet. Get started by clicking below!</p>
-                    <router-link v-bind:to="'/projects/new'" class="btn btn-primary mt-2">Create Project</router-link>
+                    <router-link v-bind:to="'/projects/new'" class="btn btn-base-1 mt-2">Create Project</router-link>
                   </div>
                 </div>
                 <!-- End Card Current Project Owner if No Projects Exist -->
@@ -212,7 +212,7 @@
                 <div class="card mb-5" v-if="user.id !== $parent.user_id && user.projects.length < 1">
                   <div class="card-body text-center">
                     <p class="mb-0">{{ user.first_name }} {{ user.last_name }} does not have any Projects yet. Please check back later or browse other projects</p>
-                    <router-link v-bind:to="'/projects/'" class="btn btn-primary mt-2">Browse Projects</router-link>
+                    <router-link v-bind:to="'/projects/'" class="btn btn-base-1 mt-2">Browse Projects</router-link>
                   </div>
                 </div>
                 <!-- ENd Card if not Current Project Owner and No Projects Exist -->
@@ -268,22 +268,32 @@
                       <li class="list-group-item"><span class="font-weight-bold">Dates:</span> {{ newDate(application.project.start_date) }} - {{ newDate(application.project.end_date) }}</li>
                       <li class="list-group-item"><span class="font-weight-bold">Location:</span> {{ application.project.address }}</li>
 
+                      <!-- Offer and accepted should be one section. 
 
-                      <li class="list-group-item" v-if="!application.offered"><span class="font-weight-bold">Offer Status:</span> {{ application.offered }}</li>
+                      If offered = false Application Status: Application Pending. You will be notified if offered the job. -->
+                      
+                      <li class="list-group-item" v-if="!application.offered"><span class="font-weight-bold">Application Status:</span> Application Pending. You will be notified if offered the job.</li>
 
+                      <!-- If offered = true Application Status: Congratulations! You've been offered this job. Please confirm below. --> 
+
+                      <!-- <li class="list-group-item" v-else-if="application.offered"><span class="font-weight-bold">Application Status:</span> Congratulations! You've been offered this job. Please confirm below.</li>   -->                  
 
                       <!-- Begin Acceptance Form -->
-                      <form  v-if="application.offered == true && application.accepted == false" v-on:submit.prevent="submit(application)">
+                      <form  v-else-if="application.offered == true && application.accepted == false" v-on:submit.prevent="submit(application)">
+                        <h6><span class="font-weight-bold">Application Status:</span> Congratulations! You've been offered this job. Please confirm below.</h6>
                         <div class="form-group">
-                          <label for="note">Note</label>
+                          <label for="note">Personal Note</label>
                           <input type="text" class="form-control" id="note" placeholder="Send a message to Project Owner" v-model="newAcceptedNote">
                         </div>
                         <button type="submit" class="btn btn-success">Accept</button>
                       </form>
+                      
                       <!-- End Acceptance Form -->
-                      <li class="list-group-item" v-if="!application.accepted"><span class="font-weight-bold">Accepted Status:</span><span class="text-warning"> Pending. You will be notified if accepted.</span></li>
-                      <li v-else class="list-group-item text-success">Congratulations! You accepted this offer!
-                      </li>
+                      
+                      <!-- If accepted = true Application Status: You've accepted this job. -->
+
+                      <li class="list-group-item" v-else="application.accepted"><span class="font-weight-bold">Application Status:</span> Congratulations! You've accepted this job. Please reach out to finalize details.</li>
+
                     </ul>
                     <router-link class="btn btn-styled btn-base-1 btn-outline btn-sm mt-3" v-bind:to="'/projects/' + application.project.id">View Project</router-link>
                   </div>
