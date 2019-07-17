@@ -107,7 +107,7 @@
 
     <!-- Begin New Project Details -->
     <div class="container col-md-8">
-      <div class="row mt-3" v-if="project.user.id == $parent.user_id">
+      <div class="row mt-5" v-if="project.user.id == $parent.user_id">
         <div class="container col-md-12 ">
           <div class="form-group">
             <h3 class="d-inline-block align-middle">My Project</h3>
@@ -116,18 +116,6 @@
           </div>
         </div>
       </div>
-
-      <!-- <div class="row">
-        <div class="container col-md-12">
-          <div class="form-group">
-            <h3 class="d-inline-block align-middle">My Project</h3>
-            <button class="btn btn-styled btn-dark btn-xs pull-right" v-on:click="setSortAttribute('created_at')">Sort by Posted Date
-              <span v-if="sortAttribute === 'created_at' && sortAscending === 1">^</span>
-              <span v-if="sortAttribute === 'created_at' && sortAscending === -1">V</span>
-            </button>
-          </div>
-        </div>
-      </div> -->
 
       <div class="card">
         <div class="card-header">
@@ -145,7 +133,7 @@
           <div class="row align-items-center">
             <div class="col text-right">
               <div class="block-author">
-                <div class="author-image author-image-xs">
+                <div class="author-image author-image-md">
                   <img v-bind:src="project.user.image">
                 </div>
                 <div class="author-info">
@@ -239,7 +227,14 @@
           <div class="card-title">
             <div class="row align-items-center">
               <div class="col-8">
-                  <h4 class="heading heading-5 strong-600">{{ application.user.first_name }} {{ application.user.last_name }}</h4>
+                  <div class="block-author">
+                    <div class="author-image author-image-md">
+                      <img v-bind:src="application.user.image">
+                    </div>
+                    <div class="author-info">
+                      <router-link class="heading heading-5 strong-600" v-bind:to="'/users/' + application.user.id">{{ application.user.first_name }} {{ application.user.last_name }}</router-link>
+                    </div>
+                  </div>
               </div>
               <div class="col-4">
                 <div class="card-icon-actions text-right">

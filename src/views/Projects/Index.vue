@@ -45,7 +45,7 @@
           <div class="row align-items-center">
             <div class="col text-right">
               <div class="block-author">
-                <div class="author-image author-image-xs">
+                <div class="author-image author-image-md">
                     <img v-bind:src="project.user.image">
                 </div>
                 <div class="author-info">
