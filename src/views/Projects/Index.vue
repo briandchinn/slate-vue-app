@@ -14,9 +14,9 @@
         <div class="container col-md-12">
           <div class="form-group">
             <h3 class="d-inline-block align-middle">Search Projects<small> (11)</small> </h3>
-            <button class="btn btn-styled btn-dark btn-xs pull-right" v-on:click="setSortAttribute('created_at')">Sort by Posted Date
-              <span v-if="sortAttribute === 'created_at' && sortAscending === 1">^</span>
-              <span v-if="sortAttribute === 'created_at' && sortAscending === -1">V</span>
+            <button class="badge badge-pill badge-dark badge-lg pull-right" v-on:click="setSortAttribute('created_at')">Sort by Posted Date
+              <span v-if="sortAttribute === 'created_at' && sortAscending === 1"><i class="fa fa-sort-up"></i></span>
+              <span v-if="sortAttribute === 'created_at' && sortAscending === -1"><i class="fa fa-sort-down"></i></span>
             </button>
           </div>
         </div>

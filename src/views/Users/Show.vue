@@ -188,28 +188,40 @@
 
                 <!-- Begin Projects -->
                 <div class="row mb-3">
+
                   <div class="col-md-12 ">
                     <h3 class="d-inline-block align-middle" v-if="user.id == $parent.user_id">My Projects</h3>
-                    <h5 class="d-inline-block align-middle" v-else>{{ user.first_name }} {{ user.last_name }}'s Projects</h5>
-                    
-                      <router-link v-if="user.id == $parent.user_id && user.projects == !false" class="btn btn-success btn-lg pull-right" v-bind:to="'/projects/new'">Create New Project</router-link>
+                    <h3 class="d-inline-block align-middle" v-else>{{ user.first_name }} {{ user.last_name }}'s Projects</h3>
+                      
+                      <!-- Begin Link Currrent Project Owner Has Projects -->
+                      <router-link v-if="user.id == $parent.user_id && user.projects.length > 0" class="btn btn-success btn-lg pull-right" v-bind:to="'/projects/new'">Create New Project</router-link>
                     
                   </div>
                 </div>
                 
-                <!-- Begin Card if No Projects Exist -->
-                <div class="card mb-5" v-if="user.projects == false">
+                <!-- Begin Card Current Project Owner if No Projects Exist -->
+                <div class="card mb-5" v-if="user.id == $parent.user_id && user.projects.length < 1">
                   <div class="card-body text-center">
                     <p class="mb-0">You haven't created any projects yet. Get started by clicking below!</p>
                     <router-link v-bind:to="'/projects/new'" class="btn btn-primary mt-2">Create Project</router-link>
                   </div>
                 </div>
-                <!-- End Card if No Projects Exist -->
+                <!-- End Card Current Project Owner if No Projects Exist -->
+
+                <!-- Begin Card if not Current Project Owner and No Projects Exist --> 
+                <div class="card mb-5" v-if="user.id !== $parent.user_id && user.projects.length < 1">
+                  <div class="card-body text-center">
+                    <p class="mb-0">{{ user.first_name }} {{ user.last_name }} does not have any Projects yet. Please check back later or browse other projects</p>
+                    <router-link v-bind:to="'/projects/'" class="btn btn-primary mt-2">Browse Projects</router-link>
+                  </div>
+                </div>
+                <!-- ENd Card if not Current Project Owner and No Projects Exist -->
 
                 <!-- Begin Projects Loop -->
                 <div class="card mt-3 z-depth-1--hover" v-for="project in user.projects">
                   <div class="card-body mt-3">
-                    <span class="block-ribbon block-ribbon-right badge badge-pill bg-green text-uppercase">Project Open</span>
+                    <span v-if="newDate(project.start_date) < new Date()"class="block-ribbon block-ribbon-right badge badge-pill bg-green text-uppercase">Project Open</span>
+                    <span v-else class="block-ribbon block-ribbon-right badge badge-pill bg-red text-uppercase">Project Closed</span>
                     <h5 class="heading heading-5 strong-600">{{ project.title }}</h5>
                     <h6 class="heading heading-sm strong-400 text-muted mb-4">
                         {{ project.address }}
@@ -253,9 +265,13 @@
                     <h5 class="heading heading-5 strong-600">{{ application.project.title }}</h5>
                     <h6 class="heading heading-sm strong-400 text-muted mb-4">{{ application.project.description }}</h6>
                     <ul class="list-group list-group-flush">
-                      <li class="list-group-item">Dates: {{ newDate(application.project.start_date) }} - {{ newDate(application.project.end_date) }}</li>
-                      <li class="list-group-item">Location: {{ application.project.address }}</li>
-                      <li class="list-group-item">Offer Status: {{ application.offered }}</li>
+                      <li class="list-group-item"><span class="font-weight-bold">Dates:</span> {{ newDate(application.project.start_date) }} - {{ newDate(application.project.end_date) }}</li>
+                      <li class="list-group-item"><span class="font-weight-bold">Location:</span> {{ application.project.address }}</li>
+
+
+                      <li class="list-group-item" v-if="!application.offered"><span class="font-weight-bold">Offer Status:</span> {{ application.offered }}</li>
+
+
                       <!-- Begin Acceptance Form -->
                       <form  v-if="application.offered == true && application.accepted == false" v-on:submit.prevent="submit(application)">
                         <div class="form-group">
@@ -265,8 +281,8 @@
                         <button type="submit" class="btn btn-success">Accept</button>
                       </form>
                       <!-- End Acceptance Form -->
-                      <li class="list-group-item" v-if="!application.accepted">Accepted Status: <span class="text-warning">Pending</span></li>
-                      <li v-else class="list-group-item text-success">You accepted this offer!
+                      <li class="list-group-item" v-if="!application.accepted"><span class="font-weight-bold">Accepted Status:</span><span class="text-warning"> Pending. You will be notified if accepted.</span></li>
+                      <li v-else class="list-group-item text-success">Congratulations! You accepted this offer!
                       </li>
                     </ul>
                     <router-link class="btn btn-styled btn-base-1 btn-outline btn-sm mt-3" v-bind:to="'/projects/' + application.project.id">View Project</router-link>
@@ -308,6 +324,7 @@ export default {
   data: function() {
     return {
       user: {},
+      project: [],
       newAcceptedNote: "",
       application: {},
       sortAttribute: "",
@@ -351,6 +368,15 @@ export default {
     newDate: function(date) {
       return moment(date).format('MMMM Do YYYY');
     },
+    datePastCheck: function(){  
+      dateA = moment(this.project.start_date, "MM-DD-YYYY");
+      dateB = moment(new Date(), "MM-DD-YYYY");
+      if (dateA.diff(dateB) > 0){
+          return true
+        } else {
+          return false
+      }
+    }
   }
 };
 </script>

@@ -213,7 +213,7 @@
         <div class="row mt-5">
           <div class="container col-md-12">
             <div class="form-group">
-              <h3 class="d-inline-block align-middle">My Applications</h3>
+              <h3 class="d-inline-block align-middle">My Applicants</h3>
               <button class="badge badge-pill badge-dark badge-lg pull-right" v-on:click="setSortAttribute('offered')">Offer Status
                 <span v-if="sortAttribute === 'offered' && sortAscending === 1">^</span>
                 <span v-if="sortAttribute === 'offered' && sortAscending === -1">V</span>
