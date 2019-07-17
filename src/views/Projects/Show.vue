@@ -1,10 +1,10 @@
 <template>
   <div class="projects-show">
     
-    {{ project }}
-
+<!--     {{ project }}
+ -->
     <!-- Project Details -->
-    <div>
+    <!-- <div>
       <h1>{{ message }}</h1>
       <h3>Title: {{ project.title }}</h3>
       <h3>Description: {{ project.description }}</h3>
@@ -17,21 +17,21 @@
       <h3>Posted: {{ relativeDate(project.created_at) }}</h3>
       <router-link v-bind:to="'/users/' + project.user.id">by {{ project.user.first_name }} {{ project.user.last_name }}</router-link>
       <br>
-      <br>
+      <br> -->
       
       <!-- Begin of Edit and Destroy -->
-      <template v-if="project.user.id == $parent.user_id">
+      <!-- <template v-if="project.user.id == $parent.user_id">
         <button>
           <router-link v-bind:to="'/projects/' + project.id + '/edit'">Edit Project</router-link>
         </button>
         <button v-on:click="destroy(project)">Destroy Project</button>
-      </template>
+      </template> -->
       <!-- End of Edit and Destroy -->
-    </div>
-    <!-- End of Project Details -->
-    <hr>
+<!--     </div>
+ -->    <!-- End of Project Details -->
+    <!-- <hr>
     
-    <h1 v-if="project.start_date > today()">You are too late</h1>
+    <h1 v-if="project.start_date > today()">You are too late</h1> -->
 
     <!-- Application Section --> 
 <!--     <template v-if="project.user.id != $parent.user_id && project.remaining_positions > 0 && project.start_date < today()">
@@ -50,7 +50,7 @@
     <!-- End of Application Section -->
 
     <!-- Applicants Section -->
-    <template v-if="project.user.id == $parent.user_id">
+    <!-- <template v-if="project.user.id == $parent.user_id">
 
       <h1>Applicants</h1>
 
@@ -72,9 +72,9 @@
           <span v-if="sortAttribute === 'favorite' && sortAscending === -1">V</span>
         </button>
       </div>
-      <br>
+      <br> -->
 
-      <div v-for="application in orderBy(filterBy(project.applications, filter, 'offered', 'created', 'favorite'), sortAttribute, sortAscending)">
+      <!-- <div v-for="application in orderBy(filterBy(project.applications, filter, 'offered', 'created', 'favorite'), sortAttribute, sortAscending)">
         <img v-bind:src="application.user.image" alt="user images" width="50"><br>
         <h5>{{ application.user.first_name }} {{ application.user.last_name }}</h5>
         <h5>Applied on: {{ newDate(application.created) }} </h5>
@@ -87,36 +87,48 @@
         </div>
         <div v-else>
           <h4>You offered {{application.user.first_name}} {{application.user.last_name}} the Job</h4>
-        </div>
+        </div> -->
         
         <!-- Favorite Logic -->
-        <div v-if="application.favorite">
+        <!-- <div v-if="application.favorite">
           <font-awesome-icon v-on:click='favorite(application, true)' :icon="[`fas`,`star`]" size="lg" style="color:gold"/>
         </div>
         <div v-else>
           <font-awesome-icon v-on:click='favorite(application, false)' :icon="[`fas`,`star`]" size="lg" style="color:grey"/>
-        </div>
+        </div> -->
         <!-- End of Favorite Logic -->
         
-        <hr>
+      <!--   <hr>
       </div>
-    </template>
+    </template> -->
     <!-- End of Applicants Section -->
     
     <!-- !!!!!!!!!!NEW THEME SECTION!!!!!!!!!!!!-->
 
     <!-- Begin New Project Details -->
-    <div class="container col-md-8 mb-3">
-      <div class="row mb-3">
-        <div class="col-md-12 ">
-          <h3 class="d-inline-block" v-if="project.user.id == $parent.user_id">My Project</h3>
-          <h5 class="d-inline-block" v-else>{{ project.user.first_name }} {{ project.user.last_name }}'s Projects</h5>
-            <div v-if="project.user.id == $parent.user_id" class="align-middle">
+    <div class="container col-md-8">
+      <div class="row mt-3" v-if="project.user.id == $parent.user_id">
+        <div class="container col-md-12 ">
+          <div class="form-group">
+            <h3 class="d-inline-block align-middle">My Project</h3>
               <button class="btn btn-danger btn-lg pull-right mr-2 align-middle" v-on:click="destroy(project)">Delete Project</button>
               <router-link class="btn btn-secondary btn-lg pull-right mr-2 align-middle" v-bind:to="'/projects/' + project.id + '/edit'">Edit Project</router-link>
-            </div>
+          </div>
         </div>
       </div>
+
+      <!-- <div class="row">
+        <div class="container col-md-12">
+          <div class="form-group">
+            <h3 class="d-inline-block align-middle">My Project</h3>
+            <button class="btn btn-styled btn-dark btn-xs pull-right" v-on:click="setSortAttribute('created_at')">Sort by Posted Date
+              <span v-if="sortAttribute === 'created_at' && sortAscending === 1">^</span>
+              <span v-if="sortAttribute === 'created_at' && sortAscending === -1">V</span>
+            </button>
+          </div>
+        </div>
+      </div> -->
+
       <div class="card">
         <div class="card-header">
           <h3 class="heading heading-5">Project</h3>
@@ -194,17 +206,34 @@
 
     <!-- Begin Applicants Details -->
     <div class="container col-md-8 mb-3 mt-3" v-if="project.user.id == $parent.user_id">
-  
-      <div class="row mt-5">
-        <div class="col-md-12 ">
-          <h3 class="d-inline-block align-middle" v-if="project.user.id == $parent.user_id">My Applicants</h3>
-          <h5 class="d-inline-block align-middle" v-else>'s Projects</h5>
-            <router-link v-if="project.user.id == $parent.user_id" class="btn btn-success btn-lg pull-right ml-2" v-bind:to="'/projects/new'">Sort by Offer Status</router-link>
-            <router-link v-if="project.user.id == $parent.user_id" class="btn btn-success btn-lg pull-right ml-2" v-bind:to="'/projects/new'">Sort by Date</router-link>
-            <router-link v-if="project.user.id == $parent.user_id" class="btn btn-success btn-lg pull-right" v-bind:to="'/projects/new'">Sort by Favorite</router-link>
+      
+      
+      <!-- Begin Applications Sort -->
+      <div v-if="project.user.id == $parent.user_id">
+        <div class="row mt-5">
+          <div class="container col-md-12">
+            <div class="form-group">
+              <h3 class="d-inline-block align-middle">My Applications</h3>
+              <button class="badge badge-pill badge-dark badge-lg pull-right" v-on:click="setSortAttribute('offered')">Offer Status
+                <span v-if="sortAttribute === 'offered' && sortAscending === 1">^</span>
+                <span v-if="sortAttribute === 'offered' && sortAscending === -1">V</span>
+              </button>
+              <button class="badge badge-pill badge-dark badge-lg pull-right mr-1" v-on:click="setSortAttribute('favorite')">Favorite
+                <span v-if="sortAttribute === 'accepted' && sortAscending === 1">^</span>
+                <span v-if="sortAttribute === 'accepted' && sortAscending === -1">V</span>
+              </button>
+              <button class="badge badge-pill badge-dark badge-lg pull-right mr-1" v-on:click="setSortAttribute('created')">Created
+                <span v-if="sortAttribute === 'created' && sortAscending === 1">^</span>
+                <span v-if="sortAttribute === 'created' && sortAscending === -1">V</span>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
+      <!-- End Applications Sort -->
 
+
+      <!-- Begin Applictions Loop -->
       <div v-for="application in orderBy(filterBy(project.applications, filter, 'offered', 'created', 'favorite'), sortAttribute, sortAscending)">
         <div class="card mb-3">
           <div class="card-title">
@@ -243,6 +272,16 @@
           </div>
         </div>
       </div>
+      <!-- End Applications Loop -->
+
+      <!-- Begin Card if No Applicants Exist -->
+      <div class="card" v-if="project.applications == false">
+        <div class="card-body text-center">
+          <p class="mb-1">You dont have any applicants yet. Browse users to find talent that might be a good fit.</p>
+          <router-link v-bind:to="'/projects'" class="btn btn-primary mt-2" disabled>Search Users</router-link>
+        </div>
+      </div>
+      <!-- End of Card if No Applicants Exist -->
     </div>
     <!-- End Applicants Details -->
     

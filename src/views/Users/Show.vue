@@ -132,8 +132,9 @@
                       <span class="stats-label text-uppercase">Followers</span>
                     </div>
                   </div>
+                  <!-- End Profile stats -->
 
-                    <!-- Profile connected accounts -->
+                  <!-- Profile connected accounts -->
                   <div class="profile-useful-links clearfix">
                     <div class="useful-links">
                       <a :href="user.imdb_url" class="link link--style-1" target="_blank">
@@ -156,7 +157,7 @@
                       </a>
                     </div>
                   </div>
-
+                  <!-- End Profile connected accounts -->
                 </div>
               </div>
               
@@ -263,11 +264,10 @@
                         </div>
                         <button type="submit" class="btn btn-success">Accept</button>
                       </form>
-
-
                       <!-- End Acceptance Form -->
                       <li class="list-group-item" v-if="!application.accepted">Accepted Status: <span class="text-warning">Pending</span></li>
-                      <li v-else class="list-group-item text-success">You accepted this offer!</li>
+                      <li v-else class="list-group-item text-success">You accepted this offer!
+                      </li>
                     </ul>
                     <router-link class="btn btn-styled btn-base-1 btn-outline btn-sm mt-3" v-bind:to="'/projects/' + application.project.id">View Project</router-link>
                   </div>
