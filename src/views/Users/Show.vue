@@ -361,6 +361,7 @@ export default {
     },
     submit: function(application){
       var params = {
+        offered: true,
         accepted: true
       };
       axios.patch("api/applications/"+ application.id, params).then(response => {
