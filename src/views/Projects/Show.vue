@@ -265,7 +265,7 @@
             <p class="card-text"><span class="font-weight-bold">Applied On:</span> {{ newDate(application.created) }}</p>
             <p class="card-text"><span class="font-weight-bold">Note:</span> {{ application.note }}</p>
             <p class="card-text" v-if="application.offered == false"><span class="font-weight-bold">Application Status:</span>  <span class="text-dark bg-warning"> Offer is pending. If you want to hire {{ application.user.first_name }} click hire button below.</span></p>
-            <p class="card-text" v-if="application.accepted == true"><span class="font-weight-bold">Application Status:</span>  <span class="text-white bg-success"> {{ application.user.first_name }} {{ application.user.first_name }} has accepted the offer.</span></p>
+            <p class="card-text" v-if="application.accepted == true"><span class="font-weight-bold">Application Status:</span>  <span class="text-white bg-success"> {{ application.user.first_name }} {{ application.user.last_name }} has accepted the offer.</span></p>
           </div>
           <div class="card-footer">
             <div class="row align-items-center">
@@ -292,7 +292,7 @@
       <div class="card" v-if="project.applications == false">
         <div class="card-body text-center">
           <p class="mb-1">You dont have any applicants yet. Browse users to find talent that might be a good fit.</p>
-          <router-link v-bind:to="'/projects'" class="btn btn-primary mt-2" disabled>Search Users</router-link>
+          <router-link v-bind:to="'/projects'" class="btn btn-base-1 mt-2" disabled>Search Users</router-link>
         </div>
       </div>
       <!-- End of Card if No Applicants Exist -->
@@ -311,19 +311,7 @@
             <div class="block-content">
               <h3 class="heading heading-6 strong-500 text-white">Most Offers Happen within 48 Hours</h3>
               <p class="text-white">
-                Lorem ipsum dolor sit amet consectetur adipiscing elit eiusmod tempor incididunt.
-              </p>
-            </div>
-          </div>
-
-          <div class="icon-block icon-block--style-1-v2 mt-5">
-            <div class="block-icon block-icon-sm pt-2">
-              <i class="fa fa-smile" style="color:#FFFFFF;"></i>
-            </div>
-            <div class="block-content">
-              <h3 class="heading heading-6 strong-500 text-white">30 days money back guarantee</h3>
-              <p class="text-white">
-                Lorem ipsum dolor sit amet consectetur adipiscing elit eiusmod tempor incididunt.
+                Should you receive an offer do your best to respond within 24 hours. 
               </p>
             </div>
           </div>
