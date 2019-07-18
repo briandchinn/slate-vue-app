@@ -120,7 +120,8 @@
       <div class="card">
         <div class="card-header">
           <h3 class="d-inline-block heading heading-4">{{ project.title }}</h3>
-          <span class="block-ribbon block-ribbon-right badge badge-pill bg-green text-uppercase align-middle">Open</span>
+          <span v-if="project.remaining_positions == 0"class="block-ribbon block-ribbon-right badge badge-pill bg-red text-uppercase align-middle">Full</span>
+          <span v-else class="block-ribbon block-ribbon-right badge badge-pill bg-green text-uppercase align-middle">Open</span>
         </div>
         <div class="card-body">
           <p class="card-text"><span class="font-weight-bold">Description:</span> {{ project.description }}</p>
@@ -156,7 +157,14 @@
     <!-- Begin Apply Section -->
     <div class="container col-md-8" style="max-width:1000px">
       <!-- Begin Quick Apply Section -->
-      <div class="card mt-4" v-if="project.user.id !== $parent.user_id && project.current_user_has_applied === false">
+      <div class="card mb-5 mt-3" v-if="project.remaining_positions == 0">
+        <div class="card-body text-center">
+          <p class="mb-0">Sorry. Project has been fully staffed! Please browse other projects</p>
+          <router-link v-bind:to="'/projects/'" class="btn btn-base-1 mt-2">Browse Projects</router-link>
+        </div>
+      </div>
+
+      <div class="card mt-4" v-else-if="project.user.id !== $parent.user_id && project.current_user_has_applied === false">
         <div class="card-body">
           <div class="row">
               <div class="col-8">
@@ -277,7 +285,7 @@
                 {{ messageOffer }}
               </div>
               <div v-else>
-                <p>You offered {{application.user.first_name}} {{application.user.last_name}} the Job!</p>
+                <p class="ml-3"><span class="text-success">You offered {{application.user.first_name}} {{application.user.last_name}} the Job!</span></p>
               </div>
              <!--  <div class="col-6 text-right">
                 <h6 class="heading heading-sm strong-400 text-muted mb-0">Applied On: {{ newDate(application.created) }}</h6>
