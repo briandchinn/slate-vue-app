@@ -28,7 +28,7 @@
     <div class="container col-md-8" style="max-width:1000px">
       <div class="card mb-3 z-depth-1--hover" v-for="project in orderBy(filterBy(projects, filter, 'title'), sortAttribute, sortAscending)">
         <div class="card-body">
-          <span class="block-ribbon block-ribbon-right badge badge-pill bg-green text-uppercase">Project Open</span>
+          <span class="block-ribbon block-ribbon-right badge badge-pill bg-green text-uppercase">Open</span>
           <h5 class="heading heading-5 strong-600">
             <router-link v-bind:to="'/projects/' + project.id">{{ project.title }}</router-link>
           </h5>

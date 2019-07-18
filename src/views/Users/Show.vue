@@ -220,8 +220,8 @@
                 <!-- Begin Projects Loop -->
                 <div class="card mt-3 z-depth-1--hover" v-for="project in user.projects">
                   <div class="card-body mt-3">
-                    <span v-if="newDate(project.start_date) < new Date()"class="block-ribbon block-ribbon-right badge badge-pill bg-green text-uppercase">Project Open</span>
-                    <span v-else class="block-ribbon block-ribbon-right badge badge-pill bg-red text-uppercase">Project Closed</span>
+                    <span class="block-ribbon block-ribbon-right badge badge-pill bg-green text-uppercase">Project Open</span>
+                    <!-- <span v-else class="block-ribbon block-ribbon-right badge badge-pill bg-red text-uppercase">Project Closed</span> -->
                     <h5 class="heading heading-5 strong-600">{{ project.title }}</h5>
                     <h6 class="heading heading-sm strong-400 text-muted mb-4">
                         {{ project.address }}
@@ -260,10 +260,10 @@
                 <!-- End Applications Sorting -->
 
                 <!-- Begin Applications Loop -->
-                <div class="card mt-1 z-depth-1--hover" v-for="application in orderBy(filterBy(user.applications, filter, 'offered', 'accepted', 'created'), sortAttribute, sortAscending)">
-                  <div class="card-body mt-3">
-                    <h5 class="heading heading-5 strong-600">{{ application.project.title }}</h5>
-                    <h6 class="heading heading-sm strong-400 text-muted mb-4">{{ application.project.description }}</h6>
+                <div class="card mt-2 z-depth-1--hover" v-for="application in orderBy(filterBy(user.applications, filter, 'offered', 'accepted', 'created'), sortAttribute, sortAscending)">
+                  <div class="card-body">
+                    <router-link class="heading heading-5 strong-600" v-bind:to="'/projects/' + application.project.id">{{ application.project.title }}</router-link>
+                    <h6 class="heading heading-sm strong-400 text-muted mb-4">Description: {{ application.project.description }}</h6>
                     <ul class="list-group list-group-flush">
                       <li class="list-group-item"><span class="font-weight-bold">Dates:</span> {{ newDate(application.project.start_date) }} - {{ newDate(application.project.end_date) }}</li>
                       <li class="list-group-item"><span class="font-weight-bold">Location:</span> {{ application.project.address }}</li>
@@ -272,15 +272,16 @@
 
                       If offered = false Application Status: Application Pending. You will be notified if offered the job. -->
                       
-                      <li class="list-group-item" v-if="!application.offered"><span class="font-weight-bold">Application Status:</span> Application Pending. You will be notified if offered the job.</li>
+                      <li class="list-group-item" v-if="!application.offered"><span class="font-weight-bold">Application Status:</span><span class="text-dark bg-warning"> Application Pending. You will be notified if offered the job.</span></li>
 
                       <!-- If offered = true Application Status: Congratulations! You've been offered this job. Please confirm below. --> 
 
                       <!-- <li class="list-group-item" v-else-if="application.offered"><span class="font-weight-bold">Application Status:</span> Congratulations! You've been offered this job. Please confirm below.</li>   -->                  
 
                       <!-- Begin Acceptance Form -->
-                      <form  v-else-if="application.offered == true && application.accepted == false" v-on:submit.prevent="submit(application)">
-                        <h6><span class="font-weight-bold">Application Status:</span> Congratulations! You've been offered this job. Please confirm below.</h6>
+                      <form  class="mt-3" v-else-if="application.offered == true && application.accepted == false" v-on:submit.prevent="submit(application)">
+                        <h6><span class="font-weight-bold">Application Status:</span> <span class="text-white bg-success">Congratulations! You've been offered this job. Please confirm below.</span></h6>
+                        {{ message }}
                         <div class="form-group">
                           <label for="note">Personal Note</label>
                           <input type="text" class="form-control" id="note" placeholder="Send a message to Project Owner" v-model="newAcceptedNote">
@@ -292,10 +293,10 @@
                       
                       <!-- If accepted = true Application Status: You've accepted this job. -->
 
-                      <li class="list-group-item" v-else="application.accepted"><span class="font-weight-bold">Application Status:</span> Congratulations! You've accepted this job. Please reach out to finalize details.</li>
+                      <li class="list-group-item" v-else="application.accepted"><span class="font-weight-bold">Application Status:</span> <span class="text-white bg-success"> Congratulations! You've accepted this job. Please reach out to finalize details.</span></li>
 
                     </ul>
-                    <router-link class="btn btn-styled btn-base-1 btn-outline btn-sm mt-3" v-bind:to="'/projects/' + application.project.id">View Project</router-link>
+                    <!-- <router-link class="btn btn-styled btn-base-1 btn-outline btn-sm mt-3" v-bind:to="'/projects/' + application.project.id">View Project</router-link> -->
                   </div>
                 </div>
                 <!-- End Applications Loop -->
@@ -336,6 +337,7 @@ export default {
       user: {},
       project: [],
       newAcceptedNote: "",
+      message: "",
       application: {},
       sortAttribute: "",
       sortAscending: 1,

@@ -106,7 +106,7 @@
     <!-- !!!!!!!!!!NEW THEME SECTION!!!!!!!!!!!!-->
 
     <!-- Begin New Project Details -->
-    <div class="container col-md-8">
+    <div class="container col-md-8 mt-5" style="max-width:1000px">
       <div class="row mt-5" v-if="project.user.id == $parent.user_id">
         <div class="container col-md-12 ">
           <div class="form-group">
@@ -119,15 +119,15 @@
 
       <div class="card">
         <div class="card-header">
-          <h3 class="heading heading-5">Project</h3>
+          <h3 class="d-inline-block heading heading-4">{{ project.title }}</h3>
+          <span class="block-ribbon block-ribbon-right badge badge-pill bg-green text-uppercase align-middle">Open</span>
         </div>
         <div class="card-body">
-          <h4 class="card-title">{{ project.title }}</h4>
-          <p class="card-text">{{ project.description }}</p>
-          <p class="card-text">{{ project.address }}</p>
-          <p class="card-text">{{ newDate(project.start_date) }} - {{ newDate(project.end_date) }}</p>
-          <p class="card-text">Total Positions: {{ project.number_of_positions }}</p>
-          <p class="card-text">Available Positions: {{ project.remaining_positions }}</p>
+          <p class="card-text"><span class="font-weight-bold">Description:</span> {{ project.description }}</p>
+          <p class="card-text"><span class="font-weight-bold">Location:</span> {{ project.address }}</p>
+          <p class="card-text"><span class="font-weight-bold">Dates:</span> {{ newDate(project.start_date) }} - {{ newDate(project.end_date) }}</p>
+          <p class="card-text"><span class="font-weight-bold">Number of Positions:</span> {{ project.number_of_positions }}</p>
+          <p class="card-text"><span class="font-weight-bold">Available Positions:</span> {{ project.remaining_positions }}</p>
         </div>
         <div class="card-footer text-muted">
           <div class="row align-items-center">
@@ -137,7 +137,7 @@
                   <img v-bind:src="project.user.image">
                 </div>
                 <div class="author-info">
-                  <router-link v-bind:to="'/users/' + project.user.id">Posted By: {{ project.user.first_name }} {{ project.user.last_name }}</router-link>
+                  Posted By: <router-link v-bind:to="'/users/' + project.user.id">{{ project.user.first_name }} {{ project.user.last_name }}</router-link>
                 </div>
               </div>
             </div>
@@ -154,20 +154,20 @@
     <!-- End New Project Details -->
     
     <!-- Begin Apply Section -->
-    <div class="container col-md-8">
+    <div class="container col-md-8" style="max-width:1000px">
       <!-- Begin Quick Apply Section -->
-      <div class="card mt-4" v-if="project.user.id != $parent.user_id">
+      <div class="card mt-4" v-if="project.user.id !== $parent.user_id && project.current_user_has_applied === false">
         <div class="card-body">
           <div class="row">
               <div class="col-8">
-                  <h3 class="heading heading-6 strong-600" for="radioPayment_2">Quick Apply</h3>
+                  <h3 class="heading heading-6 strong-600" for="radioPayment_2">Apply</h3>
 
                   <p class="c-gray-light mt-2">
-                      If you'd like to let {{ project.user.first_name }} {{ project.user.last_name }} know that you're interested and available for the project then apply below. You'll be notified should you be accepted. 
+                      If you'd like to let <strong>{{ project.user.first_name }} {{ project.user.last_name }}</strong> know that you're interested and available for the project then apply below. You'll be notified should you be accepted. 
                   </p>
               </div>
               <div class="col-4 text-right">
-                  <img src="/assets/images/icons/cards/paypal-256x160.png" width="100">
+                  <img src="/assets/images/quick-apply.png" width="100">
               </div>
           </div>
           <div class="row mt-3">
@@ -178,7 +178,7 @@
                   <div class="form-group">
                     <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" v-model="newProjectNote"></textarea>
                   </div>
-                  {{ message }}
+                  <h5>{{ message }}</h5>
                 </div>
                 <div class="text-right mt-3">
                   <button type="submit" class="btn btn-styled btn-block btn-lg btn-base-1">Apply Now</button>
@@ -189,11 +189,22 @@
         </div>
       </div>
       <!-- End Quick Apply Section -->
+      <!-- <div v-else class="container col-md-8" style="max-width:1000px"> -->
+      <div v-else class="card text-center mt-4">
+        <div class="card-body">
+          <h4 class="card-title">You aleady applied to this job.</h4>
+          <p class="card-text">Jump over to your profile page to check the status of the offer for this application!</p>
+          <router-link class="btn btn-base-1" :to="`/users/` + $parent.user_id">
+            Go to Your Profile
+          </router-link>
+        </div>
+      </div>
+      <!-- </div> -->
     </div>
     <!-- End Apply Section -->
 
     <!-- Begin Applicants Details -->
-    <div class="container col-md-8 mb-3 mt-3" v-if="project.user.id == $parent.user_id">
+    <div class="container col-md-8 mb-3 mt-3" style="max-width:1000px" v-if="project.user.id == $parent.user_id">
       
       
       <!-- Begin Applications Sort -->
@@ -251,10 +262,10 @@
             </div>
           </div>
           <div class="card-body">
-            <p class="card-text">Applied On: {{ newDate(application.created) }}</p>
-            <p class="card-text">Note: {{ application.note }}</p>
-            <p class="card-text">Offer Status: {{ application.offered }}</p>
-            <p class="card-text">Accepted Status: {{ application.accepted }}</p>
+            <p class="card-text"><span class="font-weight-bold">Applied On:</span> {{ newDate(application.created) }}</p>
+            <p class="card-text"><span class="font-weight-bold">Note:</span> {{ application.note }}</p>
+            <p class="card-text" v-if="application.offered == false"><span class="font-weight-bold">Application Status:</span>  <span class="text-dark bg-warning"> Offer is pending. If you want to hire {{ application.user.first_name }} click hire button below.</span></p>
+            <p class="card-text" v-if="application.accepted == true"><span class="font-weight-bold">Application Status:</span>  <span class="text-white bg-success"> {{ application.user.first_name }} {{ application.user.first_name }} has accepted the offer.</span></p>
           </div>
           <div class="card-footer">
             <div class="row align-items-center">
@@ -263,9 +274,10 @@
               </div> -->
               <div v-if="application.offered == !true" class="col-6">
                 <button class="btn btn-base-1" v-on:click="hire(application)">Hire Applicant</button>
+                {{ messageOffer }}
               </div>
               <div v-else>
-                <p>You offered {{application.user.first_name}} {{application.user.last_name}} the Job</p>
+                <p>You offered {{application.user.first_name}} {{application.user.last_name}} the Job!</p>
               </div>
              <!--  <div class="col-6 text-right">
                 <h6 class="heading heading-sm strong-400 text-muted mb-0">Applied On: {{ newDate(application.created) }}</h6>
@@ -289,15 +301,15 @@
     
 
     <!-- Bottom Info Bloc -->
-    <div class="container col-md-8 mb-3">
+    <div class="container col-md-8 mb-3" style="max-width:1000px">
       <div class="sidebar sidebar--style-2 mt-5 bg-secondary">
         <div class="sidebar-object mb-0">
           <div class="icon-block icon-block--style-1-v2">
             <div class="block-icon block-icon-sm pt-2">
-              <i class="icon-transport-025" style="color:#FFFFFF;"></i>
+              <i class="icon-clock" style="color:#FFFFFF;"></i>
             </div>
             <div class="block-content">
-              <h3 class="heading heading-6 strong-500 text-white">Fast shipping from 24 to 38 hours</h3>
+              <h3 class="heading heading-6 strong-500 text-white">Most Offers Happen within 48 Hours</h3>
               <p class="text-white">
                 Lorem ipsum dolor sit amet consectetur adipiscing elit eiusmod tempor incididunt.
               </p>
@@ -306,7 +318,7 @@
 
           <div class="icon-block icon-block--style-1-v2 mt-5">
             <div class="block-icon block-icon-sm pt-2">
-              <i class="icon-finance-114" style="color:#FFFFFF;"></i>
+              <i class="fa fa-smile" style="color:#FFFFFF;"></i>
             </div>
             <div class="block-content">
               <h3 class="heading heading-6 strong-500 text-white">30 days money back guarantee</h3>
@@ -340,6 +352,7 @@ export default {
       application: {},
       newProjectNote: "",
       message: "",
+      messageOffer: "",
       sortAttribute: "",
       sortAscending: 1,
       filter:"",
@@ -386,6 +399,7 @@ export default {
       };
       axios.patch("api/applications/" + application.id, params).then(response => {
         console.log("Success", response.data);
+        this.messageOffer = "You've made an offer!";
       });
     },
     favorite: function(application, favoriteValue){
