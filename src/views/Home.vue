@@ -15,7 +15,7 @@
                           Start your job search with Slate
                       </h2>
                       <p class="lead animated mt-4" data-animation-in="fadeInUpBig" data-animation-delay="200">
-                          Slate helps make the job process more effecient for assistant directors and production assistants.
+                          Slate helps to connect Assistant Directors with Production Assistants more effeciently.
                       </p>
                       <router-link class="btn btn-styled btn-lg btn-base-2 btn-circle mt-5 animated" data-animation-in="fadeInUpBig" data-animation-delay="1000" v-bind:to="`/signup`">Create Account</router-link>
                     </div>
@@ -58,7 +58,7 @@
                 </div>
 
                 <div class="col-md-6 ml-lg-auto">
-                    <img src="/assets/images/prv/app/img-4.jpg" class="img-fluid img-center rounded z-depth-3-top">
+                    <img src="/assets/images/slate-project.png" class="img-fluid img-center rounded z-depth-3-top">
                 </div>
             </div>
         </div>
@@ -79,7 +79,7 @@
                 </div>
 
                 <div class="col-md-6">
-                    <img src="/assets/images/prv/app/img-4.jpg" class="img-fluid img-center rounded z-depth-3-top">
+                    <img src="/assets/images/slate-project-index.png" class="img-fluid img-center rounded z-depth-3-top">
                 </div>
             </div>
         </div>
@@ -100,7 +100,7 @@
                 </div>
 
                 <div class="col-md-6 ml-lg-auto">
-                    <img src="/assets/images/prv/app/img-4.jpg" class="img-fluid img-center rounded z-depth-3-top">
+                    <img src="/assets/images/applicants.png" class="img-fluid img-center rounded z-depth-3-top">
                 </div>
             </div>
         </div>

@@ -305,7 +305,7 @@
                 <div class="card mb-5" v-if="user.applications == false">
                   <div class="card-body text-center">
                     <p class="mb-0">You haven't applied to any projects yet. Start searching by clicking below!</p>
-                    <router-link v-bind:to="'/projects'" class="btn btn-primary mt-2">Search Open Projects</router-link>
+                    <router-link v-bind:to="'/projects'" class="btn btn-base-1 mt-2">Search Open Projects</router-link>
                   </div>
                 </div>
                 <!-- End of Card if No Projects Exist -->

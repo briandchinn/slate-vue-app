@@ -58,10 +58,10 @@
 
           </div>
           <div class="pl-4 d-none d-lg-inline-block">
-            <router-link v-if="!isLoggedIn()" to="/signup" class="btn btn-styled  btn-base-1 btn-outline text-uppercase btn-round">Sign Up</router-link>
+            <router-link v-if="!isLoggedIn()" to="/signup" class="btn btn-styled  btn-base-3 btn-outline text-uppercase btn-round">Sign Up</router-link>
           </div>
           <div class="pl-2 d-none d-lg-inline-block">
-            <router-link v-if="!isLoggedIn()" to="/login" class="btn btn-styled   btn-base-1 btn-outline text-uppercase btn-round">Sign In</router-link>
+            <router-link v-if="!isLoggedIn()" to="/login" class="btn btn-styled   btn-base-3 btn-outline text-uppercase btn-round">Sign In</router-link>
           </div>
           
           <!-- Begin User Nav Dropdown -->
@@ -73,15 +73,15 @@
               </a>
               <div class="dropdown-menu">
                 <h6 class="dropdown-header">User menu</h6>
+                <router-link v-if="isLoggedIn()" :to="`/users/${user_id}`">
+                  <a class="dropdown-item" href="">
+                    <i class="ion-ios-gear-outline icon-lg text-primary"></i>Profile
+                  </a>
+                </router-link>
                 <router-link v-if="isLoggedIn()" to="/notifications">
                   <a class="dropdown-item" href="">
                     <!-- <span class="float-right badge badge-primary">4</span> -->
                     <i class="ion-ios-email-outline icon-lg text-primary"></i>Notifications
-                  </a>
-                </router-link>
-                <router-link v-if="isLoggedIn()" :to="`/users/${user_id}`">
-                  <a class="dropdown-item" href="">
-                    <i class="ion-ios-gear-outline icon-lg text-primary"></i>Profile
                   </a>
                 </router-link>
                 <div class="dropdown-divider" role="presentation"></div>
