@@ -18,7 +18,7 @@
           <!-- Brand/Logo -->
           <a class="navbar-brand" href="/">
             <img src="/assets/images/logo/slate_logo.png" class="d-none d-lg-inline-block" alt="Boomerang">
-            <img src="/assets/images/logo/logo-1-a.png" class="d-lg-none" alt="Boomerang">            
+            <img src="/assets/images/logo/slate_logo.png" class="d-lg-none" alt="Boomerang">            
           </a>
                   
           <div class="d-inline-block">

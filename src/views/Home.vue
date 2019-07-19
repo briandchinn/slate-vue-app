@@ -15,7 +15,7 @@
                           Start your job search with Slate
                       </h2>
                       <p class="lead animated mt-4" data-animation-in="fadeInUpBig" data-animation-delay="200">
-                          Slate helps to connect Assistant Directors with Production Assistants more effeciently.
+                          Slate helps makes the hiring process for Assistant Directors and Production Assistants easier.
                       </p>
                       <router-link class="btn btn-styled btn-lg btn-base-2 btn-circle mt-5 animated" data-animation-in="fadeInUpBig" data-animation-delay="1000" v-bind:to="`/signup`">Create Account</router-link>
                     </div>

@@ -167,16 +167,15 @@
       <div class="card mt-4" v-else-if="project.user.id !== $parent.user_id && project.current_user_has_applied === false">
         <div class="card-body">
           <div class="row">
-              <div class="col-8">
-                  <h3 class="heading heading-6 strong-600" for="radioPayment_2">Apply</h3>
-
-                  <p class="c-gray-light mt-2">
-                      If you'd like to let <strong>{{ project.user.first_name }} {{ project.user.last_name }}</strong> know that you're interested and available for the project then apply below. You'll be notified should you be accepted. 
-                  </p>
-              </div>
-              <div class="col-4 text-right">
-                  <img src="/assets/images/quick-apply.png" width="100">
-              </div>
+            <div class="col-8">
+              <h3 class="heading heading-6 strong-600" for="radioPayment_2">Apply</h3>
+              <p class="c-gray-light mt-2">
+                  If you'd like to let <strong>{{ project.user.first_name }} {{ project.user.last_name }}</strong> know that you're interested and available for the project then apply below. You'll be notified should you be accepted. 
+              </p>
+            </div>
+            <div class="col-4 text-right">
+              <img src="/assets/images/quick-apply.png" width="100">
+            </div>
           </div>
           <div class="row mt-3">
             <div class="col-md-12">

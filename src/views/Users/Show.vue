@@ -209,12 +209,12 @@
                 <!-- End Card Current Project Owner if No Projects Exist -->
 
                 <!-- Begin Card if not Current Project Owner and No Projects Exist --> 
-                <div class="card mb-5" v-if="user.id !== $parent.user_id && user.projects.length < 1">
+                <!-- <div class="card mb-5" v-if="user.id !== $parent.user_id && user.projects.length < 1">
                   <div class="card-body text-center">
                     <p class="mb-0">{{ user.first_name }} {{ user.last_name }} does not have any Projects yet. Please check back later or browse other projects</p>
                     <router-link v-bind:to="'/projects/'" class="btn btn-base-1 mt-2">Browse Projects</router-link>
                   </div>
-                </div>
+                </div> -->
                 <!-- ENd Card if not Current Project Owner and No Projects Exist -->
 
                 <!-- Begin Projects Loop -->
