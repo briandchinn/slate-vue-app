@@ -4,6 +4,7 @@ import ProjectsIndex from './views/Projects/Index.vue'
 import ProjectsNew from './views/Projects/New.vue'
 import ProjectsShow from './views/Projects/Show.vue'
 import ProjectsEdit from './views/Projects/Edit.vue'
+import UsersIndex from './views/Users/Index.vue'
 import UsersNew from './views/Users/New.vue'
 import UsersShow from './views/Users/Show.vue'
 import UsersEdit from './views/Users/Edit.vue'
@@ -44,6 +45,11 @@ export default new Router({
       path: '/users/new',
       name: 'users-new',
       component: UsersNew
+    },
+    {
+      path: '/users',
+      name: 'users-index',
+      component: UsersIndex
     },
     {
       path: '/users/:id',
