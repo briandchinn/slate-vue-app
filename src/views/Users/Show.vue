@@ -219,7 +219,7 @@
 
                 <!-- Begin Projects Loop -->
                 <div class="card mt-3 z-depth-1--hover" v-for="project in user.projects">
-                  <div class="card-body mt-3">
+                  <div class="card-body">
                     <span class="block-ribbon block-ribbon-right badge badge-pill bg-green text-uppercase">Project Open</span>
                     <!-- <span v-else class="block-ribbon block-ribbon-right badge badge-pill bg-red text-uppercase">Project Closed</span> -->
                     <h5 class="heading heading-5 strong-600">{{ project.title }}</h5>

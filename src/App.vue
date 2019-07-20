@@ -46,6 +46,9 @@
             <!-- Navbar links -->
             <ul class="navbar-nav">
               <li class="nav-item">
+                <router-link v-if="isLoggedIn()" to="/users" class="nav-link">Users</router-link>
+              </li>
+              <li class="nav-item">
                 <router-link v-if="isLoggedIn()" to="/projects" class="nav-link">Projects</router-link>
               </li>
               <li class="nav-item">
