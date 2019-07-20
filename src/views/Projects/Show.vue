@@ -156,14 +156,27 @@
     
     <!-- Begin Apply Section -->
     <div class="container col-md-8" style="max-width:1000px">
-      <!-- Begin Quick Apply Section -->
+      <!-- Begin Project Full -->
       <div class="card mb-5 mt-3" v-if="project.remaining_positions == 0">
         <div class="card-body text-center">
           <p class="mb-0">Sorry. Project has been fully staffed! Please browse other projects</p>
           <router-link v-bind:to="'/projects/'" class="btn btn-base-1 mt-2">Browse Projects</router-link>
         </div>
       </div>
+      <!-- End Project Full -->
 
+      <!-- Apply Success Message -->
+      <div v-else-if="hasBeenSubmitted" class="card text-center mb-3 mt-3">
+        <div class="card-body">
+          <h4 class="card-title">You Succesfully Applied!</h4>
+          <i class="fa fa-check-circle fa-5x mb-3" style="color: green"></i>
+          <p class="card-text">You will be notified if user offer's you the position. <br>Good luck!</p>
+          <a href="#" class="btn btn-primary">Back to Profile</a>
+        </div>
+      </div>
+      <!-- End Apply Success Message -->
+
+      <!-- Begin Quick Apply Section -->
       <div class="card mt-4" v-else-if="project.user.id !== $parent.user_id && project.current_user_has_applied === false">
         <div class="card-body">
           <div class="row">
@@ -196,6 +209,9 @@
         </div>
       </div>
       <!-- End Quick Apply Section -->
+
+
+
       <!-- <div v-else class="container col-md-8" style="max-width:1000px"> -->
       <div v-else class="card text-center mt-4">
         <div class="card-body">
@@ -206,7 +222,7 @@
           </router-link>
         </div>
       </div>
-      <!-- </div> -->
+
     </div>
     <!-- End Apply Section -->
 
@@ -352,6 +368,7 @@ export default {
       sortAscending: 1,
       filter:"",
       isFavorite: false,
+      hasBeenSubmitted: false
     };
   },
   created: function() {
@@ -385,7 +402,7 @@ export default {
       };
       axios.post("api/applications", params).then(response => {
         this.newProjectNote = "";
-        this.message = "You've succesfully applied!";
+        this.hasBeenSubmitted = true;
       })
     },
     hire: function(application){

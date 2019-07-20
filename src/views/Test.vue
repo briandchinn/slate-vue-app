@@ -3,78 +3,49 @@
 
     <h1>Test Page</h1>
     
-    <paginated-list :list-data="projects"/>
-    <div class="container col-md-8">
-      <div class="card mb-3 z-depth-2" v-for="project in orderBy(filterBy(projects, filter, 'title'), sortAttribute, sortAscending)">
-        <div class="card-body">
-          <span class="block-ribbon block-ribbon-right badge badge-pill bg-green text-uppercase">Open</span>
-          <h5 class="heading heading-5 strong-600">
-            <router-link v-bind:to="'/projects/' + project.id">{{ project.title }}</router-link>
-          </h5>
-          <ul class="inline-links inline-links--style-3 mb-1">
-              <li class="mr-2">
-                  <i class="fa fa-street-view"></i>{{ project.address }}
-              </li>
-              <li>
-                  <i class="fa fa-calendar"></i>{{ newDate(project.start_date) }} - {{ newDate(project.end_date) }}
-              </li>
-          </ul>
+    <div class="container">
+        <div v-if="hasBeenSubmitted" class="card text-center mb-3">
+          <div class="card-body">
+            <h4 class="card-title">You Succesfully Applied!</h4>
+            <i class="fa fa-check-circle fa-5x mb-3" style="color: green"></i>
+            <p class="card-text">You will be notified if user offer's you the position. <br>Good luck!</p>
+            <a href="#" class="btn btn-primary">Back to Profile</a>
+          </div>
         </div>
-        <div class="card-footer">
-          <div class="row align-items-center">
-            <div class="col text-right">
-              <div class="block-author">
-                <div class="author-image author-image-xs">
-                    <img v-bind:src="project.user.image">
-                </div>
-                <div class="author-info">
-                    <router-link v-bind:to="'/users/' + project.user.id">{{ project.user.first_name }} {{ project.user.last_name }}</router-link>
-                </div>
+
+        <div v-else class="card mt-4 mb-3">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-8">
+                <h3 class="heading heading-6 strong-600" for="radioPayment_2">Apply</h3>
+                <p class="c-gray-light mt-2">
+                    If you'd like to let know that you're interested and available for the project then apply below. You'll be notified should you be accepted. 
+                </p>
+              </div>
+              <div class="col-4 text-right">
+                <img src="/assets/images/quick-apply.png" width="100">
               </div>
             </div>
-
-            <div class="col text-right text-xs-right">
-              <h6 class="heading heading-sm strong-400 text-muted mb-0">
-                  {{ relativeDate(project.created_at) }}
-              </h6>
+            <div class="row mt-3 mb-3">
+              <div class="col-md-12">
+                <form v-on:submit.prevent="doSubmit()">
+                  <div class="form-group">
+                    <label class="control-label">Send Message</label>
+                    <div class="form-group">
+                      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    </div>
+                  </div>
+                  <div class="text-right mt-3">
+                    <button type="submit" class="btn btn-styled btn-block btn-lg btn-base-1">Apply Now</button>
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
         </div>
+
       </div>
     </div>
-
-
-    <div>
-      <button @click="prevPage">
-        Previous
-      </button>
-      <button @click="nextPage">
-        Next
-      </button>
-    </div>
-
-
-    <div class="text-center">
-      <b-button variant="primary">
-        Notifications <b-badge variant="light">4</b-badge>
-      </b-button>
-    </div>
-
-    <template>
-      <vue-pikaday 
-        v-model="now"
-        placeholder="Start Date"
-        :options="pickadayOptions"
-      />
-    </template>
-
-    <template>
-      <vue-pikaday 
-        v-model="now2"
-        placeholder="Start Date"
-        :options="pickadayOptions"
-      />
-    </template>
 
   </div>
 </template>
@@ -92,66 +63,14 @@ export default {
   mixins: [Vue2Filters.mixin],
   data: function() {
     return {
-      myFavorite: false,
-      now: null,
-      now2: null,
-      pickadayOptions: {
-        format: 'MM/DD/YYYY',
-        },
-      projects:[],
-      filter: "",
-      sortAttribute: "",
-      sortAscending: 1,
-      pageNumber: 0
+      hasBeenSubmitted: false
     };
   },
-  props:{
-      listData:{
-        type:Array,
-        required:true
-      },
-      size:{
-        type:Number,
-        required:false,
-        default: 4
-      }
-  },
-  created: function() {
-    axios.get("/api/projects").then(response => {
-      this.projects = response.data;
-    });
-  },
   methods: {
-    favorite: function(){
-      this.myFavorite = !this.myFavorite
-    },
-    clear() {
-      this.now = null;
-    },
-    newDate: function(date) {
-      return moment(date).format('MMMM Do YYYY');
-    },
-    relativeDate: function(date){
-      return moment(date).fromNow();
-    },
-    nextPage(){
-      this.pageNumber++;
-    },
-    prevPage(){
-      this.pageNumber--;
+    doSubmit(){
+      console.log("This submitted succesfully");
+      this.hasBeenSubmitted = true;
     }
   },
-  computed: {
-    pageCOunt(){
-      let l = this.listData.length,
-          s = this.size;
-      return Math.ceil(l/s);
-    },
-    projects(){
-      const start = this.pageNumber * this.size,
-            end = start + this.size;
-      return this.listData.slice(start, end);
-    }
-  }
 };
 </script>
